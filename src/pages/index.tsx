@@ -115,7 +115,7 @@ export default function Home(props: Props) {
 									>
 										karrier one
 									</Link>
-									. we use blockchain technology to decentralize telecommunications. 📡
+									. we use blockchain technology to build infrastructure. 📡
 								</>
 							),
 						},
@@ -250,7 +250,7 @@ export default function Home(props: Props) {
 							content: (
 								<p>
 									📍 right now, i'm in 
-									south korea, but i will be back in canada soon. 🇰🇷
+									dubai, but i will be back in canada soon. 🇦🇪
 								</p>
 							),
 						},
@@ -283,7 +283,7 @@ export default function Home(props: Props) {
 							key: 'discord',
 							content: (
 								<>
-									my discord is <code>@snoooozle</code> - i'm currently{' '}
+									my discord is <code>@_____cole</code> - i'm currently{' '}
 									<span
 										className={
 											{
@@ -312,7 +312,7 @@ export default function Home(props: Props) {
 								<>
 									otherwise, i'm available on{' '}
 									<Link
-										href="https://x.com/maykessj"
+										href="https://x.com/snooooozle"
 										className="nice-underline-neutral-400 dark:nice-underline-neutral-200/50"
 										target="_blank"
 									>

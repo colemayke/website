@@ -1,5 +1,5 @@
 export const UKTimeFormatter = new Intl.DateTimeFormat(undefined, {
-	timeZone: 'Asia/Seoul',
+	timeZone: 'Asia/Dubai',
 	hour: 'numeric',
 	minute: 'numeric',
 	hour12: true,
@@ -9,7 +9,7 @@ export const RelativeTimeFormatter = new Intl.RelativeTimeFormat('en', {
 	style: 'long',
 });
 
-export const discordId = '213736218754678784';
+export const discordId = '1306113064973897768';
 
 export const dob = new Date('2002-10-23');
 export const age = new Date(Date.now() - dob.getTime()).getUTCFullYear() - 1970;

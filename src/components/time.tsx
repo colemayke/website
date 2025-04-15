@@ -19,8 +19,7 @@ function Night({time}: {time: Date}) {
 			return;
 		}
 
-		// Thx Ana
-		// https://github.com/AnaArsonist/anahoward.me/blob/b41ec1a5112526c03f4e09bc4226506ce529523f/src/components/time-components/NightComponent.tsx#L35
+
 		for (let i = 0; i < 50; i++) {
 			ctx.fillStyle = 'white';
 			ctx.beginPath();
