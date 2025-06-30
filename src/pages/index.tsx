@@ -115,7 +115,7 @@ export default function Home(props: Props) {
 									>
 										karrier one
 									</Link>
-									. we use blockchain technology to build infrastructure. 📡
+									. we use blockchain technology to build telecom infrastructure. 📡
 								</>
 							),
 						},
