@@ -21,13 +21,13 @@ const DynamicStats = dynamic(() => import('../components/stats').then(mod => mod
 // Add this function at the top of the file, outside of the component
 function getTimeOfDayMessage(hour: number): string {
   if (hour >= 5 && hour < 12) {
-    return "i'm probably having my coffee and getting ready for the day. 🌅";
+    return "i'm probably brewing espresso and getting ready for the day. 🌅";
   } else if (hour >= 12 && hour < 17) {
     return "i'm likely in the middle of my workday, or working out. 🌞";
   } else if (hour >= 17 && hour < 21) {
     return "i might be wrapping up work or enjoying some downtime. 🌇";
   } else {
-    return "it's nighttime here. i'm either winding down for the day or up late working on a project. 🌙";
+    return "it's night time here. i'm either winding down for the day or up late working on a project. 🌙";
   }
 }
 
@@ -249,8 +249,7 @@ export default function Home(props: Props) {
 							key: 'location-caption',
 							content: (
 								<p>
-									📍 right now, i'm in 
-									dubai, but i will be back in canada soon. 🇦🇪
+									📍 right now, i'm in Ontario, Canada! 🇨🇦
 								</p>
 							),
 						},
