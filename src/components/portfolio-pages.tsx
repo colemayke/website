@@ -22,8 +22,6 @@ const categoryLabels: Record<PortfolioCategory, string> = {
 	hardware: 'hardware',
 };
 
-const developmentMode = process.env.NODE_ENV === 'development';
-
 function ExternalAction({link}: {link: PortfolioLink}) {
 	return (
 		<a
@@ -524,22 +522,6 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 					</div>
 				</div>
 			</section>
-
-			{developmentMode && project.evidenceToAdd?.length ? (
-				<section className="rounded-[32px] border border-dashed border-amber-300 bg-amber-50/80 p-5 shadow-sm backdrop-blur dark:border-amber-700 dark:bg-amber-950/20">
-					<p className="text-xs uppercase tracking-[0.18em] text-amber-700 dark:text-amber-300">
-						next proof to add
-					</p>
-					<ul className="mt-3 space-y-2 text-sm leading-6 text-amber-900 dark:text-amber-100">
-						{project.evidenceToAdd.map(item => (
-							<li key={item} className="flex gap-3">
-								<span className="mt-[0.45rem] size-1.5 shrink-0 rounded-full bg-amber-500" />
-								<span>{item}</span>
-							</li>
-						))}
-					</ul>
-				</section>
-			) : null}
 
 			{project.note ? (
 				<p className="text-sm leading-6 text-neutral-500 dark:text-neutral-400">{project.note}</p>

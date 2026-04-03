@@ -40,7 +40,6 @@ export interface PortfolioProject {
 	media?: PortfolioMedia[];
 	featured?: boolean;
 	featuredSummary?: string;
-	evidenceToAdd?: string[];
 	note?: string;
 }
 
@@ -216,11 +215,6 @@ export const portfolioProjects: PortfolioProject[] = [
 				layout: 'half',
 				fit: 'contain',
 			},
-		],
-		evidenceToAdd: [
-			'dashboard screenshots of analytics, KYC, and service setup',
-			'one or two user-flow diagrams',
-			'short explanation of what you personally shipped end-to-end',
 		],
 	},
 	{
@@ -435,14 +429,9 @@ export const portfolioProjects: PortfolioProject[] = [
 			outcome:
 				'Implemented a 16 x 32-bit register model, validated CBC and OFB operation against NIST 800-38A vectors, and exercised the design through both simulation and DE1-SoC hardware.',
 			artifact:
-				'Good proof here would be a register-map diagram, ModelSim waveform, and a short note showing the NIST vector pass results.',
+				'Project summary and linked digital-systems archive covering the same RTL, interface, and hardware/software validation track.',
 		},
-		evidenceToAdd: [
-			'register-map screenshot or table',
-			'ModelSim waveform of one encrypt/decrypt transaction',
-			'image of the design running on hardware',
-		],
-		note: 'Related digital-design lab material is linked here while the dedicated AES write-up is being added.',
+		note: 'Related digital-design lab material is linked above.',
 	},
 	{
 		slug: 'fpga-digital-systems',
@@ -474,12 +463,8 @@ export const portfolioProjects: PortfolioProject[] = [
 			outcome:
 				'This work became the practical foundation for later SoC integration, verification, and hardware/software co-design projects.',
 			artifact:
-				'The best support material is a compact lab summary, module diagram, and one or two simulation captures from board bring-up.',
+				'Embedded lab archive covering the same board-level RTL, interface, and validation work summarized here.',
 		},
-		evidenceToAdd: [
-			'short architecture sketch of one FPGA lab',
-			'Quartus or ModelSim screenshots',
-		],
 		note: 'Supporting FPGA coursework and lab material are linked here.',
 	},
 ];
