@@ -5,6 +5,7 @@ const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColo
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+	darkMode: 'class',
 	content: ['./{src,app}/**/*.{ts,tsx}'],
 	theme: {
 		fontFamily: {

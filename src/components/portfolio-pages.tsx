@@ -151,7 +151,7 @@ function FeaturedProjectCard({
 					href={`${getCaseStudyHref(project.slug)}?track=${category}`}
 					className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
 				>
-					view case study
+					View case study
 				</Link>
 			</div>
 		</article>
@@ -193,7 +193,7 @@ function SupportingProjectCard({
 					href={`${getCaseStudyHref(project.slug)}?track=${category}`}
 					className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 				>
-					view case study
+					View case study
 				</Link>
 			</div>
 		</article>
@@ -209,11 +209,11 @@ function HardwareDownloads() {
 						downloads
 					</p>
 					<h2 className="mt-2 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-						lab pdfs and supporting files
+						Lab PDFs and supporting files
 					</h2>
 				</div>
 				<p className="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-					downloadable reports and lab files stay here so the hardware track still links directly to the published material.
+					Downloadable reports and lab files stay here so the hardware track still links directly to the published material.
 				</p>
 			</div>
 			<div className="mt-5 grid gap-3 md:grid-cols-2">
@@ -264,11 +264,11 @@ export function ProjectsLandingPage() {
 					messages={[
 						{
 							key: 'projects-landing-1',
-							content: <>my work is organized into three tracks: design, software, and hardware.</>,
+							content: <>My work is organized into three tracks: design, software, and hardware.</>,
 						},
 						{
 							key: 'projects-landing-2',
-							content: <>each track starts with a concise index and links into full case studies.</>,
+							content: <>Each track starts with a concise index and links into full case studies.</>,
 						},
 					]}
 				/>
@@ -291,7 +291,7 @@ export function ProjectsLandingPage() {
 						</p>
 						{featuredTitles.length ? (
 							<p className="mt-4 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-								featured: {featuredTitles.join(' + ')}
+								Featured: {featuredTitles.join(' + ')}
 							</p>
 						) : null}
 						<div className="mt-5">
@@ -299,7 +299,7 @@ export function ProjectsLandingPage() {
 								href={track.href}
 								className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
 							>
-								explore {track.label}
+								Explore {track.label}
 							</Link>
 						</div>
 					</article>
@@ -345,7 +345,7 @@ export function PortfolioTrackPage({category}: {category: PortfolioCategory}) {
 						href="/projects"
 						className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 					>
-						all tracks
+						All tracks
 					</Link>
 					<a
 						href="mailto:cole.am@outlook.com"
@@ -362,7 +362,7 @@ export function PortfolioTrackPage({category}: {category: PortfolioCategory}) {
 						featured
 					</p>
 					<h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-						featured projects
+						Featured projects
 					</h2>
 				</div>
 				<div className="grid gap-4 lg:grid-cols-2">
@@ -384,7 +384,7 @@ export function PortfolioTrackPage({category}: {category: PortfolioCategory}) {
 							supporting
 						</p>
 						<h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-							supporting projects
+							Supporting projects
 						</h2>
 					</div>
 					<div className="grid gap-4 md:grid-cols-2">
@@ -428,7 +428,7 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 						href="/projects"
 						className="rounded-full border border-neutral-300 px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 					>
-						all tracks
+						All tracks
 					</Link>
 					{project.categories.map(category => (
 						<Link

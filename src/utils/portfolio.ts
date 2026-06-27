@@ -82,9 +82,12 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Balanced atmosphere and usability through large-format imagery, stable navigation, and clearer section rhythm so the site could feel premium without becoming vague.',
 			'The embedded hero capture and walkthrough turn this from a resume bullet into shipped evidence from the live production experience.',
 		],
-		stack: ['Figma', 'React', 'Webflow', 'design systems', 'landing page UX'],
+		stack: ['Figma', 'React', 'Webflow', 'Design systems', 'Landing page UX'],
 		categories: ['design'],
-		links: [{label: 'visit karrier.one', href: 'https://www.karrier.one/', external: true}],
+		featured: true,
+		featuredSummary:
+			'Public-facing telecom + web3 marketing site, rebuilt in Next.js to make a dense product story legible in a few scrolls.',
+		links: [{label: 'Visit karrier.one', href: 'https://www.karrier.one/', external: true}],
 		evidence: {
 			role: 'software engineer and product-minded designer working on the public-facing Karrier One experience.',
 			problem:
@@ -127,9 +130,12 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Used an atmospheric hero, restrained interaction design, and lighter typography treatment to support the idea of connectivity as a human right rather than a pure product pitch.',
 			'The screenshot and walkthrough turn this into concrete shipped evidence of mission-led interface work rather than just a design description.',
 		],
-		stack: ['Figma', 'content strategy', 'visual design', 'responsive web'],
+		stack: ['Figma', 'Content strategy', 'Visual design', 'Responsive web'],
 		categories: ['design'],
-		links: [{label: 'visit karrier.foundation', href: 'https://karrier.foundation/', external: true}],
+		featured: true,
+		featuredSummary:
+			'A mission-first site that reframes decentralized connectivity as public-interest infrastructure with calmer, editorial storytelling.',
+		links: [{label: 'Visit karrier.foundation', href: 'https://karrier.foundation/', external: true}],
 		evidence: {
 			role: 'designer and front-end contributor shaping the foundation-facing storytelling layer of the ecosystem.',
 			problem:
@@ -172,15 +178,15 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Key product surfaces include identity verification, account setup, service configuration, and operational actions around telecom hardware and rewards.',
 			'I treated this as both a UX and systems problem: the UI had to feel simple while still exposing real operational complexity.',
 		],
-		stack: ['TypeScript', 'React', 'dashboard UX', 'identity flows', 'design systems'],
+		stack: ['TypeScript', 'React', 'Dashboard UX', 'Identity flows', 'Design systems'],
 		categories: ['design', 'software'],
 		featured: true,
 		featuredSummary:
-			'product and front-end work across a telecom + web3 dashboard used for identity, service setup, and operational actions.',
+			'Product and front-end work across a telecom + web3 dashboard used for identity, service setup, and operational actions.',
 		links: [
-			{label: 'open dashboard', href: 'https://dashboard.karrier.one/', external: true},
+			{label: 'Open dashboard', href: 'https://dashboard.karrier.one/', external: true},
 			{
-				label: 'view dashboard guide',
+				label: 'View dashboard guide',
 				href: 'https://docs.karrier.one/karrier-number-system/user-guide/completing-kyc-verification',
 				external: true,
 			},
@@ -229,19 +235,19 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Built the software/UI side around Next.js, timeline navigation, inline PDF context, chat-style clarification, and a landing experience designed to feel like a high-trust product rather than a school demo.',
 			'Connected the experience to live camera support, progress tracking, computer-vision-assisted verification, and persona-aware instruction generation for novice through expert users.',
 		],
-		stack: ['Next.js', 'FastAPI', 'OpenAI', 'computer vision', 'product prototyping'],
+		stack: ['Next.js', 'FastAPI', 'OpenAI', 'Computer vision', 'Product prototyping'],
 		categories: ['software'],
 		featured: true,
 		featuredSummary:
-			'a capstone product that converts assembly PDFs into adaptive instructions using AI, computer vision, and a guided front-end.',
+			'A capstone product that converts assembly PDFs into adaptive instructions using AI, computer vision, and a guided front-end.',
 		links: [
 			{
-				label: 'open live demo',
+				label: 'Open live demo',
 				href: 'https://frontend-six-teal.vercel.app/',
 				external: true,
 			},
 			{
-				label: 'download capstone proposal',
+				label: 'Download capstone proposal',
 				href: '/projects/llm-assembly-capstone-proposal.docx',
 				download: true,
 			},
@@ -295,14 +301,11 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Integrated the analog path end-to-end, including the 3:1 mux, switched-cap PGA with gains of 1 through 4, a two-stage CMOS op-amp, and a 6-bit SAR ADC with Verilog-A control logic.',
 			'Verified the chain at block and top level using DC, AC, and transient simulation, then documented the design as a full ENGG 4080 mixed-signal project report.',
 		],
-		stack: ['Cadence Virtuoso', 'Spectre', 'Verilog-A', 'mixed-signal simulation'],
+		stack: ['Cadence Virtuoso', 'Spectre', 'Verilog-A', 'Mixed-signal simulation'],
 		categories: ['hardware'],
-		featured: true,
-		featuredSummary:
-			'a mixed-signal IC project that ties together analog blocks, ADC design, and full-system simulation under a 1 V supply.',
 		links: [
-			{label: 'download full project report', href: '/projects/ecg-front-end-report.pdf', download: true},
-			{label: 'download related analog lab files', href: '/labs/nano-lab1.zip', download: true},
+			{label: 'Download full project report', href: '/projects/ecg-front-end-report.pdf', download: true},
+			{label: 'Download related analog lab files', href: '/labs/nano-lab1.zip', download: true},
 		],
 		evidence: {
 			role: 'mixed-signal designer responsible for the analog front-end architecture, transistor-level implementation, and simulation/verification path.',
@@ -349,16 +352,16 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Used schematic-driven layout plus manual place-and-route to keep interconnect short and parasitics controlled on TSMC 65 nm design rules.',
 			'Compared pre- and post-layout behaviour directly, treating layout as an electrical design problem rather than a final documentation step.',
 		],
-		stack: ['Cadence Virtuoso', 'Calibre', 'full custom layout', 'post-layout analysis'],
+		stack: ['Cadence Virtuoso', 'Calibre', 'Full custom layout', 'Post-layout analysis'],
 		categories: ['hardware'],
 		links: [
 			{
-				label: 'download layout report',
+				label: 'Download layout report',
 				href: '/projects/layout-verification-report.pdf',
 				download: true,
 			},
 			{
-				label: 'download common-source lab files',
+				label: 'Download common-source lab files',
 				href: '/labs/lab1-nano-common-source.zip',
 				download: true,
 			},
@@ -410,12 +413,9 @@ export const portfolioProjects: PortfolioProject[] = [
 		],
 		stack: ['Verilog', 'SystemVerilog', 'ModelSim', 'HW/SW co-design'],
 		categories: ['hardware'],
-		featured: true,
-		featuredSummary:
-			'a hardware-security and SoC integration project built around RTL design, memory-mapped interfaces, and HW/SW verification.',
 		links: [
 			{
-				label: 'download related FPGA lab archive',
+				label: 'Download related FPGA lab archive',
 				href: '/labs/engg3050-lab1-update-9-final.zip',
 				download: true,
 			},
@@ -445,11 +445,11 @@ export const portfolioProjects: PortfolioProject[] = [
 			'Used bus-oriented interfaces and hardware/software integration patterns that fed directly into later SoC work.',
 			'Built up a practical base in FPGA verification, register design, and embedded control flow.',
 		],
-		stack: ['Verilog', 'DE1-SoC', 'Quartus', 'embedded systems'],
+		stack: ['Verilog', 'DE1-SoC', 'Quartus', 'Embedded systems'],
 		categories: ['hardware'],
 		links: [
 			{
-				label: 'download embedded lab archive',
+				label: 'Download embedded lab archive',
 				href: '/labs/engg3640-lab-3-reset.zip',
 				download: true,
 			},
@@ -472,44 +472,44 @@ export const portfolioProjects: PortfolioProject[] = [
 export const portfolioTracks: PortfolioTrack[] = [
 	{
 		slug: 'design',
-		label: 'design',
+		label: 'Design',
 		href: '/projects/design',
 		landingDescription: 'Product storytelling, interface systems, and brand-to-UX translation across telecom and web3 surfaces.',
 		pageEyebrow: 'projects / design',
-		pageTitle: 'design engineering work',
+		pageTitle: 'Design engineering work',
 		pageDescription:
 			'This track focuses on product framing, information hierarchy, and the interface decisions that made complex systems feel usable.',
 		introMessages: [
-			'i use design to make dense technical systems legible.',
-			'this track covers landing pages, dashboards, and interface systems across telecom and web3 products.',
+			'I use design to make dense technical systems legible.',
+			'This track covers landing pages, dashboards, and interface systems across telecom and web3 products.',
 		],
 	},
 	{
 		slug: 'software',
-		label: 'software',
+		label: 'Software',
 		href: '/projects/software',
 		landingDescription: 'AI-assisted products, operational tooling, and full-stack systems built around real user workflows.',
 		pageEyebrow: 'projects / software',
-		pageTitle: 'software engineering work',
+		pageTitle: 'Software engineering work',
 		pageDescription:
 			'This track emphasizes application logic, system behavior, product workflows, and the front-end/backend integration behind them.',
 		introMessages: [
-			'i build product workflows where front-end experience and system behavior have to work together.',
-			'this track covers ai-assisted products, operational tooling, and full-stack application work.',
+			'I build product workflows where front-end experience and system behavior have to work together.',
+			'This track covers AI-assisted products, operational tooling, and full-stack application work.',
 		],
 	},
 	{
 		slug: 'hardware',
-		label: 'hardware',
+		label: 'Hardware',
 		href: '/projects/hardware',
 		landingDescription: 'Mixed-signal IC design, custom layout verification, RTL, FPGA systems, and hardware-software co-design.',
 		pageEyebrow: 'projects / hardware',
-		pageTitle: 'hardware engineering work',
+		pageTitle: 'Hardware engineering work',
 		pageDescription:
 			'This track covers the semiconductor and digital-systems side of my work, from analog block design through verification and hardware-software integration.',
 		introMessages: [
-			'my hardware work spans mixed-signal ic design, physical verification, rtl, and fpga systems.',
-			'these case studies focus on architecture, simulation, and verification results.',
+			'My hardware work spans mixed-signal IC design, physical verification, RTL, and FPGA systems.',
+			'These case studies focus on architecture, simulation, and verification results.',
 		],
 	},
 ];

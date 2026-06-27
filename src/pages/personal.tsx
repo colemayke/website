@@ -12,18 +12,18 @@ const DynamicStats = dynamic(() => import('../components/stats').then(mod => mod
 
 function getTimeOfDayMessage(hour: number): string {
 	if (hour >= 5 && hour < 12) {
-		return "i'm usually getting the day started with espresso and work.";
+		return "I'm usually getting the day started with espresso and work.";
 	}
 
 	if (hour >= 12 && hour < 17) {
-		return "i'm usually in the middle of work or training.";
+		return "I'm usually in the middle of work or training.";
 	}
 
 	if (hour >= 17 && hour < 21) {
-		return "i'm usually wrapping up work or winding down.";
+		return "I'm usually wrapping up work or winding down.";
 	}
 
-	return "it's usually late enough that i'm either winding down or still working on something.";
+	return "It's usually late enough that I'm either winding down or still working on something.";
 }
 
 export default function PersonalPage() {
@@ -56,13 +56,13 @@ export default function PersonalPage() {
 							key: 'personal-intro',
 							content: (
 								<>
-									outside of engineering, i spend most of my time lifting, listening to music, traveling, and with my dog.
+									Outside of engineering, I spend most of my time lifting, listening to music, traveling, and with my dog.
 								</>
 							),
 						},
 						{
 							key: 'personal-home',
-							content: <>i keep this page simple, but i like having one place for the off-clock side of life.</>,
+							content: <>I keep this page simple, but I like having one place for the off-clock side of life.</>,
 						},
 					]}
 				/>
@@ -73,7 +73,7 @@ export default function PersonalPage() {
 							key: 'off-clock',
 							content: (
 								<>
-									benny gets a lot of my attention outside of work too.
+									Benny gets a lot of my attention outside of work too.
 								</>
 							),
 						},
@@ -88,7 +88,7 @@ export default function PersonalPage() {
 											className="h-auto w-64 rounded-lg shadow-md"
 										/>
 									</div>
-									<p className="mt-2 text-left text-sm">meet benny.</p>
+									<p className="mt-2 text-left text-sm">Meet Benny.</p>
 								</>
 							),
 						},
@@ -99,13 +99,13 @@ export default function PersonalPage() {
 					messages={[
 						{
 							key: 'location-caption',
-							content: <p>i&apos;m based in ontario, canada.</p>,
+							content: <p>I&apos;m based in Ontario, Canada.</p>,
 						},
 						{
 							key: 'local-time',
 							content: (
 								<p>
-									current local time:{' '}
+									Current local time:{' '}
 									<span className="font-semibold">
 										{UKTimeFormatter.format(now)}
 									</span>
@@ -122,7 +122,7 @@ export default function PersonalPage() {
 							key: 'socials',
 							content: (
 								<>
-									away from work, you can also find me on x, instagram, or discord.
+									Away from work, you can also find me on X, Instagram, or Discord.
 									<div className="mt-3 flex flex-wrap gap-2">
 										<a
 											href="https://x.com/coleieii"
@@ -130,7 +130,7 @@ export default function PersonalPage() {
 											rel="noreferrer"
 											className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 										>
-											x / @coleieii
+											X / @coleieii
 										</a>
 										<a
 											href="https://www.instagram.com/colemayke"
@@ -138,10 +138,10 @@ export default function PersonalPage() {
 											rel="noreferrer"
 											className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 										>
-											instagram / @colemayke
+											Instagram / @colemayke
 										</a>
 										<span className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 dark:border-neutral-700 dark:text-neutral-200">
-											discord / @hhollowtips
+											Discord / @hhollowtips
 										</span>
 									</div>
 								</>
@@ -154,7 +154,7 @@ export default function PersonalPage() {
 					messages={[
 						{
 							key: 'personal-note',
-							content: <>i like keeping one small corner of the site for life outside work.</>,
+							content: <>I like keeping one small corner of the site for life outside work.</>,
 						},
 						{
 							key: 'stats',

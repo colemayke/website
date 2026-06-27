@@ -8,21 +8,15 @@ export function FeaturedWork() {
 		<section className="space-y-3">
 			<div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
 				<div>
-					<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-						featured work
-					</p>
-					<h2 className="mt-2 font-[var(--font-serif)] text-3xl italic leading-tight text-neutral-900 dark:text-neutral-100">
-						start here
+					<h2 className="font-[var(--font-serif)] text-3xl italic leading-tight text-neutral-900 dark:text-neutral-100">
+						Start here
 					</h2>
-					<p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-						a quick cross-section of product, software, and hardware work.
-					</p>
 				</div>
 				<Link
 					href="/projects"
 					className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 				>
-					see all projects
+					See all projects
 				</Link>
 			</div>
 
@@ -55,7 +49,7 @@ export function FeaturedWork() {
 								href={`/projects/${project.slug}`}
 								className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
 							>
-								view case study
+								View case study
 							</Link>
 							{project.links[0] ? (
 								<a

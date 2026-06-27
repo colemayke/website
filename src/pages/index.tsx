@@ -48,13 +48,14 @@ export default function Home(props: Props) {
 							messages={[
 								{
 									key: 'home-intro-1',
-									content: <>hi, i&apos;m cole.</>,
+									content: <>Hi, I&apos;m Cole.</>,
 								},
 								{
 									key: 'home-intro-2',
 									content: (
 										<>
-											i work across software, product, and ic design with an ece background.
+											I&apos;m a design and software engineer. I build products end to end — from
+											the interface and front-end to the systems and AI behind them.
 										</>
 									),
 								},
@@ -64,13 +65,25 @@ export default function Home(props: Props) {
 							messages={[
 								{
 									key: 'home-intro-3',
-									content: <>currently at terrion. previously karrier one + rogers.</>,
+									content: (
+										<>
+											Currently a Design Specialist II at Terrion. Previously Product Lead and
+											Software Engineer at Karrier One — full timeline in{' '}
+											<Link
+												href="/experience"
+												className="nice-underline-neutral-400 dark:nice-underline-neutral-200/50"
+											>
+												experience
+											</Link>
+											.
+										</>
+									),
 								},
 								{
 									key: 'home-intro-4',
 									content: (
 										<>
-											featured work is below. full case studies are organized by track in{' '}
+											Featured work is below. Full case studies are organized by track in{' '}
 											<Link
 												href="/projects"
 												className="nice-underline-neutral-400 dark:nice-underline-neutral-200/50"
@@ -89,9 +102,8 @@ export default function Home(props: Props) {
 									key: 'home-intro-5',
 									content: (
 										<>
-											i&apos;ve built across telecom infrastructure, web3 products, and
-											mixed-signal hardware — currently open to design engineering, software,
-											and IC roles.
+											I&apos;ve shipped across telecom, fintech, and web3 — currently focused on
+											design engineering and full-stack software.
 										</>
 									),
 								},
@@ -112,7 +124,7 @@ export default function Home(props: Props) {
 							rel="noreferrer"
 							className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 						>
-							linkedin
+							LinkedIn
 						</a>
 					</div>
 				</motion.section>
@@ -124,12 +136,12 @@ export default function Home(props: Props) {
 				{showSpotify ? (
 					<motion.section {...sectionMotion}>
 						<div className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-							<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-								live now
+							<p className="text-xs tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
+								Spotify
 							</p>
 							<div className="mt-3 space-y-3">
 								<p className="text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-									what&apos;s currently on repeat.
+									What&apos;s currently on repeat.
 								</p>
 								<Link
 									href={`https://open.spotify.com/track/${lanyard.spotify?.track_id}`}
