@@ -8,7 +8,7 @@ export function FeaturedWork() {
 		<section className="space-y-3">
 			<div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
 				<div>
-					<h2 className="font-[var(--font-serif)] text-3xl italic leading-tight text-neutral-900 dark:text-neutral-100">
+					<h2 className="text-3xl font-semibold tracking-tight leading-tight text-neutral-900 dark:text-neutral-100">
 						Start here
 					</h2>
 				</div>
@@ -30,7 +30,7 @@ export function FeaturedWork() {
 							{project.categories.map(category => (
 								<span
 									key={`${project.slug}-${category}`}
-									className="rounded-full border border-neutral-200 px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
+									className="rounded-full border border-neutral-200 px-2.5 py-1 text-[11px] capitalize text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
 								>
 									{category}
 								</span>

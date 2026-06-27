@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
-import {MessageGroup} from './message';
+import {type ReactNode, useEffect} from 'react';
+import {Conversation, type ConversationTurn} from './conversation';
 import {
 	getCaseStudyHref,
 	getTrackProjects,
@@ -17,10 +17,20 @@ import {
 } from '../utils/portfolio';
 
 const categoryLabels: Record<PortfolioCategory, string> = {
-	design: 'design',
-	software: 'software',
-	hardware: 'hardware',
+	design: 'Design',
+	software: 'Software',
+	hardware: 'Hardware',
 };
+
+const trackPrompts: Record<PortfolioCategory, string> = {
+	design: 'What design work have you done?',
+	software: 'What software engineering have you done?',
+	hardware: 'What hardware have you worked on?',
+};
+
+const bubbleLink = 'nice-underline-neutral-400 dark:nice-underline-neutral-200/50';
+
+type Bubble = {key: string; content: ReactNode};
 
 function ExternalAction({link}: {link: PortfolioLink}) {
 	return (
@@ -45,7 +55,7 @@ function EvidenceCard({
 }) {
 	return (
 		<div className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-3 dark:border-neutral-800 dark:bg-neutral-900/70">
-			<p className="text-[11px] uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">
+			<p className="text-[11px] capitalize text-neutral-500 dark:text-neutral-400">
 				{label}
 			</p>
 			<p className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{value}</p>
@@ -96,313 +106,202 @@ function ProjectMediaFigure({
 	);
 }
 
-function FeaturedProjectCard({
-	project,
-	trackProject,
-	category,
-}: {
-	project: PortfolioProject;
-	trackProject: PortfolioTrackProject;
-	category: PortfolioCategory;
-}) {
-	const media = project.media?.[0];
+function projectBubbles(
+	project: PortfolioProject,
+	trackProject: PortfolioTrackProject,
+	category: PortfolioCategory,
+): Bubble[] {
+	const media = project.media?.find(item => item.type === 'image');
+	const externalLink = project.links.find(link => link.external || link.download);
 
-	return (
-		<article className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-			{media ? (
-				<div className="mb-5">
-					<ProjectMediaFigure media={media} variant="teaser" />
-				</div>
-			) : null}
-
-			<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-				{project.eyebrow}
-			</p>
-			<h2 className="mt-2 font-[var(--font-serif)] text-3xl italic leading-tight text-neutral-900 dark:text-neutral-100">
-				{project.title}
-			</h2>
-			<p className="mt-4 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-				problem
-			</p>
-			<p className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-				{trackProject.problem}
-			</p>
-
-			<div className="mt-5 flex flex-wrap gap-2">
-				{project.stack.map(item => (
-					<span
-						key={`${project.slug}-${item}`}
-						className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+	return [
+		{
+			key: `${project.slug}-title`,
+			content: (
+				<>
+					<span className="font-semibold">{project.title}</span>
+					<span className="text-neutral-500 dark:text-neutral-400"> · {project.eyebrow}</span>
+				</>
+			),
+		},
+		...(media
+			? [
+					{
+						key: `${project.slug}-media`,
+						content: (
+							<div className="mt-1 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
+								<img
+									src={media.src}
+									alt={media.label}
+									loading="lazy"
+									className={clsx(
+										'h-40 w-72 max-w-full',
+										media.fit === 'contain'
+											? 'bg-neutral-50 object-contain dark:bg-neutral-950'
+											: 'object-cover object-top',
+									)}
+								/>
+							</div>
+						),
+					},
+				]
+			: []),
+		{
+			key: `${project.slug}-summary`,
+			content: <>{trackProject.summary}</>,
+		},
+		{
+			key: `${project.slug}-stack`,
+			content: (
+				<span className="text-neutral-500 dark:text-neutral-400">
+					{project.stack.join(' · ')}
+				</span>
+			),
+		},
+		{
+			key: `${project.slug}-actions`,
+			content: (
+				<span className="flex flex-wrap items-center gap-x-4 gap-y-1">
+					<Link
+						href={`${getCaseStudyHref(project.slug)}?track=${category}`}
+						className={bubbleLink}
 					>
-						{item}
-					</span>
-				))}
-			</div>
-
-			<p className="mt-5 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-				what i did / what shipped
-			</p>
-			<p className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-				{trackProject.shipped}
-			</p>
-
-			<div className="mt-5">
-				<Link
-					href={`${getCaseStudyHref(project.slug)}?track=${category}`}
-					className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
-				>
-					View case study
-				</Link>
-			</div>
-		</article>
-	);
+						View case study →
+					</Link>
+					{externalLink ? (
+						<a
+							href={externalLink.href}
+							target={externalLink.external ? '_blank' : undefined}
+							rel={externalLink.external ? 'noreferrer' : undefined}
+							download={externalLink.download || undefined}
+							className={bubbleLink}
+						>
+							{externalLink.label} →
+						</a>
+					) : null}
+				</span>
+			),
+		},
+	];
 }
 
-function SupportingProjectCard({
-	project,
-	trackProject,
-	category,
-}: {
-	project: PortfolioProject;
-	trackProject: PortfolioTrackProject;
-	category: PortfolioCategory;
-}) {
-	return (
-		<article className="rounded-[28px] border border-neutral-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
-			<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-				{project.eyebrow}
-			</p>
-			<h3 className="mt-2 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-				{project.title}
-			</h3>
-			<p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-				{trackProject.summary}
-			</p>
-			<div className="mt-4 flex flex-wrap gap-2">
-				{project.stack.map(item => (
-					<span
-						key={`${project.slug}-${item}`}
-						className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
-					>
-						{item}
-					</span>
-				))}
-			</div>
-			<div className="mt-4">
-				<Link
-					href={`${getCaseStudyHref(project.slug)}?track=${category}`}
-					className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
-				>
-					View case study
-				</Link>
-			</div>
-		</article>
-	);
-}
-
-function HardwareDownloads() {
-	return (
-		<section className="rounded-[28px] border border-neutral-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
-			<div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-				<div>
-					<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-						downloads
-					</p>
-					<h2 className="mt-2 text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-						Lab PDFs and supporting files
-					</h2>
-				</div>
-				<p className="max-w-xl text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-					Downloadable reports and lab files stay here so the hardware track still links directly to the published material.
-				</p>
-			</div>
-			<div className="mt-5 grid gap-3 md:grid-cols-2">
-				{portfolioDownloads.map(file => (
-					<a
-						key={file.href}
-						href={file.href}
-						target={file.fileType === 'PDF' ? '_blank' : undefined}
-						rel={file.fileType === 'PDF' ? 'noreferrer' : undefined}
-						download={file.fileType !== 'PDF' || undefined}
-						className="rounded-[24px] border border-neutral-200 bg-neutral-50/80 p-4 transition-colors hover:border-neutral-900 dark:border-neutral-800 dark:bg-neutral-900/70 dark:hover:border-neutral-100"
-					>
-						<div className="flex items-center justify-between gap-3">
-							<h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+function downloadBubbles(): Bubble[] {
+	return [
+		{
+			key: 'downloads-head',
+			content: <>Lab PDFs and supporting files, if you want the source material:</>,
+		},
+		{
+			key: 'downloads-list',
+			content: (
+				<ul className="space-y-1.5">
+					{portfolioDownloads.map(file => (
+						<li key={file.href}>
+							<a
+								href={file.href}
+								target={file.fileType === 'PDF' ? '_blank' : undefined}
+								rel={file.fileType === 'PDF' ? 'noreferrer' : undefined}
+								download={file.fileType !== 'PDF' || undefined}
+								className={bubbleLink}
+							>
 								{file.title}
-							</h3>
-							<span className="rounded-full border border-neutral-300 px-2 py-0.5 text-[11px] uppercase tracking-[0.16em] text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
-								{file.fileType}
-							</span>
-						</div>
-						<p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-							{file.description}
-						</p>
-					</a>
-				))}
-			</div>
-		</section>
-	);
+							</a>
+							<span className="text-neutral-500 dark:text-neutral-400"> · {file.fileType}</span>
+						</li>
+					))}
+				</ul>
+			),
+		},
+	];
 }
 
 export function ProjectsLandingPage() {
-	const trackCards = portfolioTracks.map(track => {
-		const featuredTitles = getTrackProjects(track.slug)
-			.filter(({trackProject}) => trackProject.tier === 'featured')
-			.slice(0, 2)
-			.map(({project}) => project.title);
+	const turns: ConversationTurn[] = [
+		{kind: 'prompt', key: 'pl-q', text: 'What have you worked on?'},
+		...portfolioTracks.map((track): ConversationTurn => {
+			const featuredTitles = getTrackProjects(track.slug)
+				.filter(({trackProject}) => trackProject.tier === 'featured')
+				.slice(0, 2)
+				.map(({project}) => project.title);
 
-		return {
-			track,
-			featuredTitles,
-		};
-	});
-
-	return (
-		<div className="space-y-8">
-			<ul className="space-y-3">
-				<MessageGroup
-					messages={[
-						{
-							key: 'projects-landing-1',
-							content: <>My work is organized into three tracks: design, software, and hardware.</>,
-						},
-						{
-							key: 'projects-landing-2',
-							content: <>Each track starts with a concise index and links into full case studies.</>,
-						},
-					]}
-				/>
-			</ul>
-
-			<div className="grid gap-4 lg:grid-cols-3">
-				{trackCards.map(({track, featuredTitles}) => (
-					<article
-						key={track.slug}
-						className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85"
-					>
-						<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-							{track.pageEyebrow}
-						</p>
-						<h2 className="mt-2 font-[var(--font-serif)] text-3xl italic leading-tight text-neutral-900 dark:text-neutral-100">
-							{track.label}
-						</h2>
-						<p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-							{track.landingDescription}
-						</p>
-						{featuredTitles.length ? (
-							<p className="mt-4 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-								Featured: {featuredTitles.join(' + ')}
-							</p>
-						) : null}
-						<div className="mt-5">
-							<Link
-								href={track.href}
-								className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
-							>
-								Explore {track.label}
+			return {
+				kind: 'reply',
+				key: track.slug,
+				messages: [
+					{key: `${track.slug}-label`, content: <span className="font-semibold">{track.label}</span>},
+					{key: `${track.slug}-desc`, content: <>{track.landingDescription}</>},
+					...(featuredTitles.length
+						? [
+								{
+									key: `${track.slug}-featured`,
+									content: (
+										<span className="text-neutral-500 dark:text-neutral-400">
+											Featured: {featuredTitles.join(', ')}
+										</span>
+									),
+								},
+							]
+						: []),
+					{
+						key: `${track.slug}-link`,
+						content: (
+							<Link href={track.href} className={bubbleLink}>
+								Explore {track.label.toLowerCase()} →
 							</Link>
-						</div>
-					</article>
-				))}
-			</div>
-		</div>
-	);
+						),
+					},
+				],
+			};
+		}),
+	];
+
+	return <Conversation turns={turns} />;
 }
 
 export function PortfolioTrackPage({category}: {category: PortfolioCategory}) {
 	const track = portfolioTracks.find(item => item.slug === category)!;
 	const trackProjects = getTrackProjects(category);
-	const featuredProjects = trackProjects.filter(({trackProject}) => trackProject.tier === 'featured');
-	const supportingProjects = trackProjects.filter(({trackProject}) => trackProject.tier === 'supporting');
 
 	useEffect(() => {
 		window.sessionStorage.setItem('portfolio-track-context', category);
 	}, [category]);
 
-	return (
-		<div className="space-y-8">
-			<ul className="space-y-3">
-				<MessageGroup
-					messages={track.introMessages.map((message, index) => ({
-						key: `${track.slug}-intro-${index}`,
-						content: <>{message}</>,
-					}))}
-				/>
-			</ul>
+	const turns: ConversationTurn[] = [
+		{kind: 'prompt', key: `${track.slug}-q`, text: trackPrompts[category]},
+		...trackProjects.map(
+			({project, trackProject}): ConversationTurn => ({
+				kind: 'reply',
+				key: `${category}-${project.slug}`,
+				messages: projectBubbles(project, trackProject, category),
+			}),
+		),
+		...(category === 'hardware'
+			? ([
+					{kind: 'prompt', key: 'dl-q', text: 'Anything I can download?'},
+					{kind: 'reply', key: 'downloads', messages: downloadBubbles()},
+				] as ConversationTurn[])
+			: []),
+		{
+			kind: 'reply',
+			key: `${track.slug}-cta`,
+			messages: [
+				{
+					key: 'cta-1',
+					content: (
+						<>
+							Reach me at{' '}
+							<a href="mailto:cole.am@outlook.com" className={bubbleLink}>
+								cole.am@outlook.com
+							</a>
+							.
+						</>
+					),
+				},
+			],
+		},
+	];
 
-			<section className="rounded-[28px] border border-neutral-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
-				<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-					{track.pageEyebrow}
-				</p>
-				<h1 className="mt-2 font-[var(--font-serif)] text-4xl italic leading-tight text-neutral-900 dark:text-neutral-100">
-					{track.pageTitle}
-				</h1>
-				<p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-					{track.pageDescription}
-				</p>
-				<div className="mt-5 flex flex-wrap gap-2">
-					<Link
-						href="/projects"
-						className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
-					>
-						All tracks
-					</Link>
-					<a
-						href="mailto:cole.am@outlook.com"
-						className="inline-flex items-center rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1.5 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-700 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
-					>
-						cole.am@outlook.com
-					</a>
-				</div>
-			</section>
-
-			<section className="space-y-4">
-				<div>
-					<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-						featured
-					</p>
-					<h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-						Featured projects
-					</h2>
-				</div>
-				<div className="grid gap-4 lg:grid-cols-2">
-					{featuredProjects.map(({project, trackProject}) => (
-						<FeaturedProjectCard
-							key={`${category}-${project.slug}`}
-							project={project}
-							trackProject={trackProject}
-							category={category}
-						/>
-					))}
-				</div>
-			</section>
-
-			{supportingProjects.length ? (
-				<section className="space-y-4">
-					<div>
-						<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-							supporting
-						</p>
-						<h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-							Supporting projects
-						</h2>
-					</div>
-					<div className="grid gap-4 md:grid-cols-2">
-						{supportingProjects.map(({project, trackProject}) => (
-							<SupportingProjectCard
-								key={`${category}-${project.slug}`}
-								project={project}
-								trackProject={trackProject}
-								category={category}
-							/>
-						))}
-					</div>
-				</section>
-			) : null}
-
-			{category === 'hardware' ? <HardwareDownloads /> : null}
-		</div>
-	);
+	return <Conversation turns={turns} />;
 }
 
 export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
@@ -426,16 +325,16 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 				<div className="flex flex-wrap gap-2">
 					<Link
 						href="/projects"
-						className="rounded-full border border-neutral-300 px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
+						className="rounded-full border border-neutral-300 px-2.5 py-1 text-[11px] text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 					>
-						All tracks
+						All work
 					</Link>
 					{project.categories.map(category => (
 						<Link
 							key={`${project.slug}-${category}`}
 							href={`/projects/${category}`}
 							className={clsx(
-								'rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] transition-colors',
+								'rounded-full border px-2.5 py-1 text-[11px] transition-colors',
 								normalizedTrack === category
 									? 'border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900'
 									: 'border-neutral-200 text-neutral-500 hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100',
@@ -446,10 +345,10 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 					))}
 				</div>
 
-				<p className="mt-5 text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
+				<p className="mt-5 text-xs text-neutral-500 dark:text-neutral-400">
 					{project.eyebrow}
 				</p>
-				<h1 className="mt-2 font-[var(--font-serif)] text-4xl italic leading-tight text-neutral-900 dark:text-neutral-100">
+				<h1 className="mt-2 text-4xl font-semibold tracking-tight leading-tight text-neutral-900 dark:text-neutral-100">
 					{project.title}
 				</h1>
 				<p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-700 dark:text-neutral-300">
@@ -479,7 +378,7 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 			) : null}
 
 			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
+				<p className="text-xs text-neutral-500 dark:text-neutral-400">
 					{project.sectionTitle}
 				</p>
 				<ul className="mt-3 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
@@ -493,8 +392,8 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 			</section>
 
 			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-					stack
+				<p className="text-xs text-neutral-500 dark:text-neutral-400">
+					Stack
 				</p>
 				<div className="mt-3 flex flex-wrap gap-2">
 					{project.stack.map(item => (
@@ -509,8 +408,8 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 			</section>
 
 			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-					evidence
+				<p className="text-xs text-neutral-500 dark:text-neutral-400">
+					Evidence
 				</p>
 				<div className="mt-3 grid gap-3 md:grid-cols-2">
 					<EvidenceCard label="role" value={project.evidence.role} />

@@ -8,7 +8,6 @@ const navItems = [
 	{href: '/projects/design', label: 'Design'},
 	{href: '/projects/software', label: 'Software'},
 	{href: '/projects/hardware', label: 'Hardware'},
-	{href: '/personal', label: 'Personal'},
 ];
 
 export function SiteNav({currentPath}: {currentPath: string}) {
@@ -22,7 +21,7 @@ export function SiteNav({currentPath}: {currentPath: string}) {
 					Cole Mayke
 				</Link>
 				<p className="text-xs text-neutral-500 dark:text-neutral-400">
-					Portfolio, case studies, and engineering work
+					Toronto, Ontario
 				</p>
 			</div>
 

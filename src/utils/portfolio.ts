@@ -73,10 +73,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'karrier-one-main-site',
 		title: 'Karrier One Main Site',
-		eyebrow: 'product design / marketing site',
+		eyebrow: 'Product design / marketing site',
 		summary:
 			'I worked on the public-facing Karrier One site as a product translation layer, shaping a landing experience that makes telecom infrastructure, digital identity, and decentralized connectivity feel legible in a few scrolls.',
-		sectionTitle: 'recruiter case study',
+		sectionTitle: 'Recruiter case study',
 		points: [
 			'Worked to simplify a dense telecom + web3 story into a cleaner narrative arc: hero promise first, then identity, solutions, and conversion-focused calls to action.',
 			'Balanced atmosphere and usability through large-format imagery, stable navigation, and clearer section rhythm so the site could feel premium without becoming vague.',
@@ -121,10 +121,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'karrier-foundation',
 		title: 'Karrier Foundation',
-		eyebrow: 'mission-driven design',
+		eyebrow: 'Mission-driven design',
 		summary:
 			'This site focused on the mission-facing side of the ecosystem, turning decentralized telecom infrastructure into a calmer public-interest narrative about access, dignity, and underserved communities.',
-		sectionTitle: 'recruiter case study',
+		sectionTitle: 'Recruiter case study',
 		points: [
 			'Reframed the story around a strong mission headline, quieter navigation, and softer visual pacing so the first impression felt civic and human instead of crypto-native.',
 			'Used an atmospheric hero, restrained interaction design, and lighter typography treatment to support the idea of connectivity as a human right rather than a pure product pitch.',
@@ -132,9 +132,6 @@ export const portfolioProjects: PortfolioProject[] = [
 		],
 		stack: ['Figma', 'Content strategy', 'Visual design', 'Responsive web'],
 		categories: ['design'],
-		featured: true,
-		featuredSummary:
-			'A mission-first site that reframes decentralized connectivity as public-interest infrastructure with calmer, editorial storytelling.',
 		links: [{label: 'Visit karrier.foundation', href: 'https://karrier.foundation/', external: true}],
 		evidence: {
 			role: 'designer and front-end contributor shaping the foundation-facing storytelling layer of the ecosystem.',
@@ -169,10 +166,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'karrier-dashboard',
 		title: 'Karrier One Dashboard',
-		eyebrow: 'software product / product design',
+		eyebrow: 'Software product / product design',
 		summary:
 			'The dashboard is the operational layer behind Karrier One: identity, KYC, numbers, services, and deployment actions all meet in one logged-in product surface.',
-		sectionTitle: 'what mattered',
+		sectionTitle: 'What mattered',
 		points: [
 			'The main design problem was blending web3 mechanics with familiar web2 product flows so users could complete high-friction tasks without feeling lost.',
 			'Key product surfaces include identity verification, account setup, service configuration, and operational actions around telecom hardware and rewards.',
@@ -224,22 +221,22 @@ export const portfolioProjects: PortfolioProject[] = [
 		],
 	},
 	{
-		slug: 'llm-assembly-guide',
-		title: 'LLM-Based Automated Assembly Guide',
-		eyebrow: 'software engineering / capstone',
+		slug: 'llm-assembly-platform',
+		title: 'LLM-Powered Assembly Guidance Platform',
+		eyebrow: 'Software engineering / capstone',
 		summary:
-			'My capstone project turns assembly PDFs into persona-aware step-by-step instructions, combining structured planning, interactive guidance, computer vision, and a polished product interface.',
-		sectionTitle: 'recruiter case study',
+			'As technical lead, I built a platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance through a retrieval-augmented LLM pipeline with citation-linked traceability.',
+		sectionTitle: 'Recruiter case study',
 		points: [
-			'Framed the product around a simple loop: upload a manual, extract cited steps, assemble in a model-first interface, and verify progress without leaving the workflow.',
-			'Built the software/UI side around Next.js, timeline navigation, inline PDF context, chat-style clarification, and a landing experience designed to feel like a high-trust product rather than a school demo.',
-			'Connected the experience to live camera support, progress tracking, computer-vision-assisted verification, and persona-aware instruction generation for novice through expert users.',
+			'Served as technical lead for the team, building a platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance via a retrieval-augmented LLM pipeline with citation-linked traceability.',
+			'Built the full TypeScript / React front-end and a Python OpenCV subsystem that tracks physical assembly progress from a live camera feed.',
+			'Added a text-to-speech mode for hands-busy use, and reduced assembly time in user testing.',
 		],
-		stack: ['Next.js', 'FastAPI', 'OpenAI', 'Computer vision', 'Product prototyping'],
+		stack: ['TypeScript', 'React', 'Python', 'OpenCV', 'RAG'],
 		categories: ['software'],
 		featured: true,
 		featuredSummary:
-			'A capstone product that converts assembly PDFs into adaptive instructions using AI, computer vision, and a guided front-end.',
+			'A platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance through a retrieval-augmented LLM pipeline with citation-linked traceability.',
 		links: [
 			{
 				label: 'Open live demo',
@@ -253,13 +250,13 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'software/UI lead on a four-person capstone team, contributing to product definition, system architecture, and the user-facing assembly workflow.',
+			role: 'technical lead on a four-person capstone team, owning product definition, the TypeScript / React front-end, and the Python OpenCV subsystem.',
 			problem:
 				'Static manuals are hard to follow, difficult to personalize, and weak at handling real-time confusion, task state, and step-by-step context.',
 			ownership:
-				'I drove the product-facing web experience and helped shape how PDF parsing, structured planning, persona-aware guidance, and live assistance fit into one coherent flow.',
+				'I led the team and built the full TypeScript / React front-end plus a Python OpenCV subsystem, shaping how PDF parsing, retrieval-augmented generation, persona-adapted guidance, and live camera tracking fit into one coherent flow.',
 			outcome:
-				'Shipped a live prototype that takes PDF input and turns it into cited steps, 3D-first navigation, chat assistance, progress gating, and camera-assisted validation. In showcase testing, the system reduced assembly completion time from 121 s to 109.5 s, a 9.05% improvement, and reached an illustrative SUS score of 78/100.',
+				'Shipped a live prototype that turns PDF input into cited steps, progress tracking, and camera-assisted validation, with a text-to-speech mode for hands-busy use. In showcase testing, the system reduced assembly completion time from 121 s to 109.5 s, a 9.05% improvement, and reached an illustrative SUS score of 78/100.',
 			artifact:
 				'Live Vercel demo, capstone proposal report, and a poster-backed showcase presentation from the University of Guelph capstone showcase.',
 		},
@@ -267,9 +264,9 @@ export const portfolioProjects: PortfolioProject[] = [
 			{
 				type: 'image',
 				src: '/projects/capstone-homepage.jpg',
-				label: 'Homepage of the live LLM Assembly Instruction Platform showing the product framing, assembly workflow, and guided interface.',
+				label: 'Homepage of the live LLM Assembly Instruction Platform showing the product framing, assembly workflow, and product interface.',
 				caption:
-					'Homepage of the capstone product, designed around PDF-grounded instructions, 3D-guided assembly, and step-by-step workflow control.',
+					'Homepage of the capstone product, designed around PDF-grounded instructions, 3D-assisted assembly, and step-by-step workflow control.',
 			},
 			{
 				type: 'image',
@@ -292,10 +289,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'ecg-front-end',
 		title: 'Mixed-Signal ECG Front-End IC',
-		eyebrow: 'electrical engineering / mixed-signal ic design',
+		eyebrow: 'Electrical engineering / mixed-signal IC design',
 		summary:
 			'I designed a smartwatch-oriented ECG front-end in TSMC 65 nm that combined a 3:1 CMOS mux, switched-cap PGA, and 6-bit SAR ADC under a 1 V supply.',
-		sectionTitle: 'recruiter case study',
+		sectionTitle: 'Recruiter case study',
 		points: [
 			'Designed around a realistic smartwatch constraint set: 1 V battery supply, 20 mV maximum ECG amplitude, 10 kΩ source resistance, and low-power operation on TSMC 65 nm CMOS.',
 			'Integrated the analog path end-to-end, including the 3:1 mux, switched-cap PGA with gains of 1 through 4, a two-stage CMOS op-amp, and a 6-bit SAR ADC with Verilog-A control logic.',
@@ -343,10 +340,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'layout-verification',
 		title: 'Analog Front-End Layout & Verification',
-		eyebrow: 'electrical engineering / physical design',
+		eyebrow: 'Electrical engineering / physical design',
 		summary:
 			'I took a common-source CMOS amplifier through the full custom IC flow, ending with DRC, LVS, PEX, and post-layout validation in TSMC 65 nm.',
-		sectionTitle: 'recruiter case study',
+		sectionTitle: 'Recruiter case study',
 		points: [
 			'Executed the complete Virtuoso-to-Calibre flow: schematic capture, symbol generation, testbenching, layout drafting, DRC, LVS, PEX, and post-layout simulation.',
 			'Used schematic-driven layout plus manual place-and-route to keep interconnect short and parasitics controlled on TSMC 65 nm design rules.',
@@ -402,10 +399,10 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'aes-soc',
 		title: 'AES-128 SoC Coprocessor',
-		eyebrow: 'electrical engineering / digital systems',
+		eyebrow: 'Electrical engineering / digital systems',
 		summary:
 			'I built a memory-mapped AES-128 coprocessor with CBC and OFB support, verified it in simulation, and validated the HW/SW path against NIST test vectors.',
-		sectionTitle: 'highlights',
+		sectionTitle: 'Highlights',
 		points: [
 			'Defined a programmer-facing register map for keys, IVs, plaintext, and ciphertext transfer across the bus interface.',
 			'Paired the RTL with embedded C running on the HPS so the project behaved like a usable SoC peripheral instead of an isolated block.',
@@ -429,17 +426,17 @@ export const portfolioProjects: PortfolioProject[] = [
 			outcome:
 				'Implemented a 16 x 32-bit register model, validated CBC and OFB operation against NIST 800-38A vectors, and exercised the design through both simulation and DE1-SoC hardware.',
 			artifact:
-				'Project summary and linked digital-systems archive covering the same RTL, interface, and hardware/software validation track.',
+				'Project summary and linked digital-systems archive covering the same RTL, interface, and hardware/software validation work.',
 		},
 		note: 'Related digital-design lab material is linked above.',
 	},
 	{
 		slug: 'fpga-digital-systems',
 		title: 'FPGA Digital Systems Design',
-		eyebrow: 'electrical engineering / fpga systems',
+		eyebrow: 'Electrical engineering / FPGA systems',
 		summary:
 			'I used DE1-SoC-based labs and project work to design and validate RTL modules, state machines, and memory-mapped interfaces for embedded FPGA systems.',
-		sectionTitle: 'highlights',
+		sectionTitle: 'Highlights',
 		points: [
 			'Worked across simulation and board-level validation rather than stopping at RTL-only design.',
 			'Used bus-oriented interfaces and hardware/software integration patterns that fed directly into later SoC work.',
@@ -475,13 +472,13 @@ export const portfolioTracks: PortfolioTrack[] = [
 		label: 'Design',
 		href: '/projects/design',
 		landingDescription: 'Product storytelling, interface systems, and brand-to-UX translation across telecom and web3 surfaces.',
-		pageEyebrow: 'projects / design',
+		pageEyebrow: 'Projects / design',
 		pageTitle: 'Design engineering work',
 		pageDescription:
 			'This track focuses on product framing, information hierarchy, and the interface decisions that made complex systems feel usable.',
 		introMessages: [
 			'I use design to make dense technical systems legible.',
-			'This track covers landing pages, dashboards, and interface systems across telecom and web3 products.',
+			'Mostly landing pages, dashboards, and interface systems for telecom and web3 products.',
 		],
 	},
 	{
@@ -489,13 +486,13 @@ export const portfolioTracks: PortfolioTrack[] = [
 		label: 'Software',
 		href: '/projects/software',
 		landingDescription: 'AI-assisted products, operational tooling, and full-stack systems built around real user workflows.',
-		pageEyebrow: 'projects / software',
+		pageEyebrow: 'Projects / software',
 		pageTitle: 'Software engineering work',
 		pageDescription:
 			'This track emphasizes application logic, system behavior, product workflows, and the front-end/backend integration behind them.',
 		introMessages: [
 			'I build product workflows where front-end experience and system behavior have to work together.',
-			'This track covers AI-assisted products, operational tooling, and full-stack application work.',
+			'Mostly AI-assisted products, operational tooling, and full-stack application work.',
 		],
 	},
 	{
@@ -503,7 +500,7 @@ export const portfolioTracks: PortfolioTrack[] = [
 		label: 'Hardware',
 		href: '/projects/hardware',
 		landingDescription: 'Mixed-signal IC design, custom layout verification, RTL, FPGA systems, and hardware-software co-design.',
-		pageEyebrow: 'projects / hardware',
+		pageEyebrow: 'Projects / hardware',
 		pageTitle: 'Hardware engineering work',
 		pageDescription:
 			'This track covers the semiconductor and digital-systems side of my work, from analog block design through verification and hardware-software integration.',
@@ -543,9 +540,9 @@ export const portfolioTrackProjects: Record<PortfolioCategory, PortfolioTrackPro
 	],
 	software: [
 		{
-			slug: 'llm-assembly-guide',
+			slug: 'llm-assembly-platform',
 			tier: 'featured',
-			summary: 'A capstone product that turns static assembly PDFs into adaptive instructions, progress tracking, and vision-assisted guidance.',
+			summary: 'A platform that turns technical PDFs into persona-adapted, step-by-step assembly guidance with progress tracking and camera-assisted validation.',
 			problem:
 				'How do you turn static manuals into a live workflow that can adapt instructions, answer questions, and track assembly progress in context?',
 			shipped:
@@ -595,7 +592,13 @@ export const portfolioTrackProjects: Record<PortfolioCategory, PortfolioTrackPro
 	],
 };
 
-export const featuredPortfolioProjects = portfolioProjects.filter(project => project.featured);
+// Explicit homepage ordering: lead with work that proves systems plus design,
+// then at most one marketing site. Only projects still flagged `featured` show.
+const featuredOrder = ['karrier-dashboard', 'llm-assembly-platform', 'karrier-one-main-site'];
+
+export const featuredPortfolioProjects = featuredOrder
+	.map(slug => portfolioProjects.find(project => project.slug === slug))
+	.filter((project): project is PortfolioProject => Boolean(project?.featured));
 
 export const portfolioDownloads: PortfolioDownload[] = [
 	{

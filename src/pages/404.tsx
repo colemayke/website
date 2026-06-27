@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Page404() {
 	return (
 		<main className="mx-auto max-w-3xl space-y-2 px-6 pb-40 pt-16">
-			<p className="font-serif text-3xl">404 Not Found</p>
+			<p className="text-3xl font-semibold tracking-tight">404 Not Found</p>
 			<p>Sorry, this is either not finished yet, or it never existed in the first place.</p>
 
 			<div>

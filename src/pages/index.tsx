@@ -1,189 +1,207 @@
-import {motion} from 'framer-motion';
-import type {GetStaticProps} from 'next';
-import Link from 'next/link';
-import {SiSpotify} from 'react-icons/si';
-import {useLanyardWS, type Data as LanyardData} from 'use-lanyard';
-import album from '../../public/album.png';
-import {FeaturedWork} from '../components/featured-work';
-import {MessageGroup} from '../components/message';
+import dynamic from 'next/dynamic';
+import {useEffect, useState} from 'react';
+import benny from '../../public/benny.png';
+import {Conversation, type ConversationTurn} from '../components/conversation';
 import {SiteNav} from '../components/site-nav';
-import {getLanyard} from '../server/lanyard';
-import {discordId} from '../utils/constants';
+import {UKTimeFormatter} from '../utils/constants';
 
-export interface Props {
-	lanyard: LanyardData;
+const DynamicStats = dynamic(() => import('../components/stats').then(mod => mod.Stats), {
+	ssr: false,
+});
+
+const DynamicNowPlaying = dynamic(
+	() => import('../components/now-playing').then(mod => mod.NowPlaying),
+	{ssr: false},
+);
+
+const DynamicFlightMap = dynamic(
+	() => import('../components/flight-map').then(mod => mod.FlightMap),
+	{ssr: false},
+);
+
+const pillLink =
+	'inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100';
+
+function getTimeOfDayMessage(hour: number): string {
+	if (hour >= 5 && hour < 12) {
+		return "I'm usually getting the day started with espresso and work.";
+	}
+
+	if (hour >= 12 && hour < 17) {
+		return "I'm usually in the middle of work or training.";
+	}
+
+	if (hour >= 17 && hour < 21) {
+		return "I'm usually wrapping up work or winding down.";
+	}
+
+	return "It's usually late enough that I'm either winding down or still working on something.";
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-	const lanyard = await getLanyard(discordId);
+export default function Home() {
+	const [now, setNow] = useState(() => new Date());
 
-	return {
-		revalidate: 10,
-		props: {
-			lanyard,
+	useEffect(() => {
+		const interval = window.setInterval(() => setNow(new Date()), 60_000);
+
+		return () => window.clearInterval(interval);
+	}, []);
+
+	const timeOfDayMessage = getTimeOfDayMessage(now.getHours());
+
+	const turns: ConversationTurn[] = [
+		{
+			kind: 'reply',
+			key: 'intro',
+			messages: [
+				{key: 'intro-1', content: <>Hi, I&apos;m Cole.</>},
+				{
+					key: 'intro-2',
+					content: (
+						<>
+							I&apos;m a design engineer. I design products and ship the systems and AI behind
+							them. My background is in electrical and computer engineering, with a Bachelor of
+							Engineering from the University of Guelph.
+						</>
+					),
+				},
+			],
 		},
-	};
-};
-
-const sectionMotion = {
-	initial: {opacity: 0, y: 12},
-	animate: {opacity: 1, y: 0},
-	transition: {duration: 0.28},
-};
-
-export default function Home(props: Props) {
-	const lanyard = useLanyardWS(discordId, {
-		initialData: props.lanyard,
-	})!;
-	const showSpotify = Boolean(lanyard.spotify);
+		{kind: 'prompt', key: 'q-now', text: 'What are you working on these days?'},
+		{
+			kind: 'reply',
+			key: 'now',
+			messages: [
+				{
+					key: 'now-1',
+					content: (
+						<>
+							Currently a Design Specialist II at Terrion, previously Product Lead and Software
+							Engineer at Karrier One.
+						</>
+					),
+				},
+				{
+					key: 'now-contact',
+					content: (
+						<div className="flex flex-wrap gap-2">
+							<a href="mailto:cole.am@outlook.com" className={pillLink}>
+								cole.am@outlook.com
+							</a>
+							<a
+								href="https://www.linkedin.com/in/colemayke/"
+								target="_blank"
+								rel="noreferrer"
+								className={pillLink}
+							>
+								LinkedIn
+							</a>
+						</div>
+					),
+				},
+			],
+		},
+		{kind: 'prompt', key: 'q-life', text: 'What do you do outside of work?'},
+		{
+			kind: 'reply',
+			key: 'life',
+			messages: [
+				{
+					key: 'life-1',
+					content: (
+						<>
+							Away from work, I spend most of my time lifting, listening to music, traveling,
+							and with my dog.
+						</>
+					),
+				},
+				{key: 'life-2', content: <>Benny gets a lot of my attention too.</>},
+				{
+					key: 'life-benny',
+					content: (
+						<>
+							<div className="mt-1 flex justify-center">
+								<img
+									src={benny.src}
+									alt="Benny, my Shiba Inu"
+									className="h-auto w-56 rounded-lg shadow-md"
+								/>
+							</div>
+							<p className="mt-2 text-left">Meet Benny.</p>
+						</>
+					),
+				},
+			],
+		},
+		{kind: 'prompt', key: 'q-where', text: 'Where are you based?'},
+		{
+			kind: 'reply',
+			key: 'where',
+			messages: [
+				{key: 'where-1', content: <>I&apos;m based in Ontario, Canada.</>},
+				{
+					key: 'where-2',
+					content: (
+						<>
+							Right now it&apos;s{' '}
+							<span className="font-semibold">{UKTimeFormatter.format(now)}</span> here.{' '}
+							{timeOfDayMessage}
+						</>
+					),
+				},
+			],
+		},
+		{kind: 'prompt', key: 'q-socials', text: 'Where else can I find you?'},
+		{
+			kind: 'reply',
+			key: 'socials',
+			messages: [
+				{
+					key: 'socials-1',
+					content: (
+						<>
+							On X, Instagram, or Discord.
+							<div className="mt-3 flex flex-wrap gap-2">
+								<a
+									href="https://x.com/coleieii"
+									target="_blank"
+									rel="noreferrer"
+									className={pillLink}
+								>
+									X / @coleieii
+								</a>
+								<a
+									href="https://www.instagram.com/colemayke"
+									target="_blank"
+									rel="noreferrer"
+									className={pillLink}
+								>
+									Instagram / @colemayke
+								</a>
+								<span className="inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 dark:border-neutral-700 dark:text-neutral-200">
+									Discord / @hhollowtips
+								</span>
+							</div>
+						</>
+					),
+				},
+			],
+		},
+		{kind: 'prompt', key: 'q-music', text: 'What are you listening to?'},
+		{kind: 'block', key: 'now-playing', content: <DynamicNowPlaying />},
+		{kind: 'prompt', key: 'q-travel', text: 'Where have you traveled?'},
+		{kind: 'block', key: 'flights', content: <DynamicFlightMap />},
+		{
+			kind: 'reply',
+			key: 'stats',
+			messages: [{key: 'stats-1', content: <DynamicStats />}],
+		},
+	];
 
 	return (
-		<main className="mx-auto max-w-5xl px-3 pb-16 pt-10">
+		<main className="mx-auto max-w-xl px-3 pb-16 pt-10">
 			<SiteNav currentPath="/" />
-
-			<div className="space-y-8">
-				<motion.section {...sectionMotion} className="space-y-4">
-					<ul className="space-y-3">
-						<MessageGroup
-							messages={[
-								{
-									key: 'home-intro-1',
-									content: <>Hi, I&apos;m Cole.</>,
-								},
-								{
-									key: 'home-intro-2',
-									content: (
-										<>
-											I&apos;m a design and software engineer. I build products end to end — from
-											the interface and front-end to the systems and AI behind them.
-										</>
-									),
-								},
-							]}
-						/>
-						<MessageGroup
-							messages={[
-								{
-									key: 'home-intro-3',
-									content: (
-										<>
-											Currently a Design Specialist II at Terrion. Previously Product Lead and
-											Software Engineer at Karrier One — full timeline in{' '}
-											<Link
-												href="/experience"
-												className="nice-underline-neutral-400 dark:nice-underline-neutral-200/50"
-											>
-												experience
-											</Link>
-											.
-										</>
-									),
-								},
-								{
-									key: 'home-intro-4',
-									content: (
-										<>
-											Featured work is below. Full case studies are organized by track in{' '}
-											<Link
-												href="/projects"
-												className="nice-underline-neutral-400 dark:nice-underline-neutral-200/50"
-											>
-												projects
-											</Link>
-											.
-										</>
-									),
-								},
-							]}
-						/>
-						<MessageGroup
-							messages={[
-								{
-									key: 'home-intro-5',
-									content: (
-										<>
-											I&apos;ve shipped across telecom, fintech, and web3 — currently focused on
-											design engineering and full-stack software.
-										</>
-									),
-								},
-							]}
-						/>
-					</ul>
-
-					<div className="flex flex-wrap gap-2">
-						<a
-							href="mailto:cole.am@outlook.com"
-							className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
-						>
-							cole.am@outlook.com
-						</a>
-						<a
-							href="https://www.linkedin.com/in/colemayke/"
-							target="_blank"
-							rel="noreferrer"
-							className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
-						>
-							LinkedIn
-						</a>
-					</div>
-				</motion.section>
-
-				<motion.section {...sectionMotion}>
-					<FeaturedWork />
-				</motion.section>
-
-				{showSpotify ? (
-					<motion.section {...sectionMotion}>
-						<div className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-							<p className="text-xs tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-								Spotify
-							</p>
-							<div className="mt-3 space-y-3">
-								<p className="text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-									What&apos;s currently on repeat.
-								</p>
-								<Link
-									href={`https://open.spotify.com/track/${lanyard.spotify?.track_id}`}
-									className="group relative block overflow-hidden rounded-[24px] p-4"
-									target="_blank"
-								>
-									<div className="absolute -inset-[1px] rounded-[24px] border-[3px] border-black/10 dark:border-white/20" />
-									<div className="absolute inset-0">
-										<div className="absolute inset-0 z-10 bg-white/70 group-hover:bg-white/80 dark:bg-neutral-800/80 dark:group-hover:bg-neutral-800/90" />
-										<img
-											src={lanyard.spotify?.album_art_url ?? album.src}
-											alt="Album art"
-											aria-hidden
-											className="absolute top-1/2 -translate-y-1/2 scale-[3] blur-3xl saturate-[15] dark:saturate-[10]"
-										/>
-									</div>
-
-									<div className="relative z-10 flex items-center gap-4 pr-8">
-										<img
-											src={lanyard.spotify?.album_art_url ?? album.src}
-											alt="Album art"
-											className="size-14 rounded-md border-2"
-										/>
-										<div className="min-w-0 space-y-1">
-											<p className="line-clamp-1 text-sm">
-												<strong>{lanyard.spotify?.song}</strong>
-											</p>
-											<p className="line-clamp-1 text-sm text-neutral-800 dark:text-white/60">
-												{lanyard.spotify?.artist.split('; ').join(', ')}
-											</p>
-										</div>
-									</div>
-
-									<div className="absolute right-4 top-4 z-10">
-										<SiSpotify className="size-4 text-neutral-900/80 dark:text-white/50" />
-									</div>
-								</Link>
-							</div>
-						</div>
-					</motion.section>
-				) : null}
-			</div>
+			<Conversation turns={turns} />
 		</main>
 	);
 }
