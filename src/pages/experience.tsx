@@ -31,9 +31,8 @@ export default function ExperiencePage() {
 					key: 't2',
 					content: (
 						<>
-							It&apos;s a real mix day to day: AI automation for commercial leasing, the data
-							pipelines behind it (Salesforce into BigQuery on GCP, infra as code in Pulumi), and
-							front-end work like an interactive network map and a Next.js rebuild of the site.
+							I work on AI automation for the commercial leasing side, the data infrastructure
+							behind it, and the front-end and product work on top.
 						</>
 					),
 				},
@@ -71,6 +70,15 @@ export default function ExperiencePage() {
 							As product lead I ran a 10-plus person team across telecom, fintech, and crypto,
 							launched a combined banking and telecom app in Flutter, and helped scale a cellular
 							offloading network to 1,000+ devices and a million Wi-Fi users.
+						</>
+					),
+				},
+				{
+					key: 'k4',
+					content: (
+						<>
+							I also got to travel and represent Karrier One at conferences, TOKEN2049 in
+							Singapore and Dubai, and Sui Basecamp in Singapore, France, and Dubai.
 						</>
 					),
 				},
