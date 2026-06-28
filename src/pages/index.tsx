@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import {useEffect, useState} from 'react';
 import benny from '../../public/benny.png';
-import {Conversation, type ConversationTurn} from '../components/conversation';
+import {ChatImage, Conversation, type ConversationTurn} from '../components/conversation';
 import {SiteNav} from '../components/site-nav';
 import {UKTimeFormatter} from '../utils/constants';
 
@@ -120,11 +120,11 @@ export default function Home() {
 					key: 'life-benny',
 					content: (
 						<>
-							<div className="mt-1 flex justify-center">
-								<img
+							<div className="mt-1">
+								<ChatImage
 									src={benny.src}
 									alt="Benny, my Shiba Inu"
-									className="h-auto w-56 rounded-lg shadow-md"
+									className="h-auto w-56 object-cover hover:w-80"
 								/>
 							</div>
 							<p className="mt-2 text-left">Meet Benny.</p>

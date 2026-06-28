@@ -73,113 +73,107 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'karrier-one-main-site',
 		title: 'Karrier One Main Site',
-		eyebrow: 'Product design / marketing site',
+		eyebrow: 'Branding & design system',
 		summary:
-			'I worked on the public-facing Karrier One site as a product translation layer, shaping a landing experience that makes telecom infrastructure, digital identity, and decentralized connectivity feel legible in a few scrolls.',
-		sectionTitle: 'Recruiter case study',
+			"Karrier One's public site. I built the branding and the design system, then the front-end and layout, all to get a telecom and crypto product across to people who'd never seen either before.",
+		sectionTitle: 'What I did',
 		points: [
-			'Worked to simplify a dense telecom + web3 story into a cleaner narrative arc: hero promise first, then identity, solutions, and conversion-focused calls to action.',
-			'Balanced atmosphere and usability through large-format imagery, stable navigation, and clearer section rhythm so the site could feel premium without becoming vague.',
-			'The embedded hero capture and walkthrough turn this from a resume bullet into shipped evidence from the live production experience.',
+			'Built the Karrier One brand and a design system, so the visual language stayed consistent across the site and into the rest of the product.',
+			'Put the page in a clear order. What it is at the top, then identity, the products, then the calls to action.',
+			'Used big imagery and a steady, consistent layout so it read as credible without getting vague.',
+			'Built the front-end so the shipped site matched the design.',
 		],
-		stack: ['Figma', 'React', 'Webflow', 'Design systems', 'Landing page UX'],
+		stack: ['Figma', 'Branding', 'Design systems', 'React', 'Webflow', 'Landing page UX'],
 		categories: ['design'],
 		featured: true,
 		featuredSummary:
-			'Public-facing telecom + web3 marketing site, rebuilt in Next.js to make a dense product story legible in a few scrolls.',
+			"Karrier One's public site. I did the branding, the design system, and the front-end to make a dense telecom and crypto product easy to follow.",
 		links: [{label: 'Visit karrier.one', href: 'https://www.karrier.one/', external: true}],
 		evidence: {
-			role: 'software engineer and product-minded designer working on the public-facing Karrier One experience.',
+			role: 'Brand, design system, and front-end on the public site.',
 			problem:
-				'The platform combined telecom infrastructure, digital identity, and web3 mechanics, which made the story easy to overcomplicate for first-time visitors.',
+				"Karrier One mixes telecom, digital identity, and crypto. That's a lot to land with someone who's never seen any of it.",
 			ownership:
-				'I helped shape the page hierarchy, front-end implementation, and design-system consistency so the story stayed understandable as users moved from the hero into deeper product sections.',
+				'I built the brand and design system, the page structure, and the front-end, and kept everything consistent from the hero down into the deeper sections.',
 			outcome:
-				'The site became a stronger partner-facing entry point for onboarding and business conversations, with a clearer bridge between brand, product value, and the technical ecosystem underneath it.',
-			artifact:
-				'Live site, production hero capture, and a short walkthrough clip recorded from the shipped experience.',
+				"When I started, Karrier One had a weak brand and a website that barely converted. I designed the whole brand and rebuilt the site around it, and it turned into something credible: the first thing partners and new users get pointed to.",
+			artifact: 'The live site, a hero capture, and a short screen recording of it in use.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/karrier-one-hero.jpg',
-				label: 'Karrier One landing-page hero with the Connectivity without Borders headline, city backdrop, and primary call to action.',
-				caption:
-					'Production hero section from the live site, showing the borderless-connectivity framing, persistent nav, and direct CTA treatment.',
+				label: 'The Karrier One landing hero on the live site.',
+				caption: 'The hero on the live site.',
 			},
 			{
 				type: 'video',
 				src: '/projects/karrier-one-walkthrough.mp4',
 				poster: '/projects/karrier-one-hero.jpg',
-				label: 'Screen-recorded walkthrough of the Karrier One website showing how the story flows from the hero into deeper product sections.',
-				caption:
-					'Short walkthrough of the live site that shows the actual pacing, motion, and narrative transition into the digital-identity and solutions sections.',
+				label: 'Screen recording of the Karrier One site.',
+				caption: 'A short screen recording of the live site.',
 			},
 		],
-		note: 'Live production capture from karrier.one.',
+		note: 'Live capture from karrier.one.',
 	},
 	{
 		slug: 'karrier-foundation',
 		title: 'Karrier Foundation',
-		eyebrow: 'Mission-driven design',
+		eyebrow: 'Mission site',
 		summary:
-			'This site focused on the mission-facing side of the ecosystem, turning decentralized telecom infrastructure into a calmer public-interest narrative about access, dignity, and underserved communities.',
-		sectionTitle: 'Recruiter case study',
+			'The foundation side of Karrier One. Same ecosystem, but this one was about the mission, so it needed a calmer, more human tone than the product site.',
+		sectionTitle: 'What I did',
 		points: [
-			'Reframed the story around a strong mission headline, quieter navigation, and softer visual pacing so the first impression felt civic and human instead of crypto-native.',
-			'Used an atmospheric hero, restrained interaction design, and lighter typography treatment to support the idea of connectivity as a human right rather than a pure product pitch.',
-			'The screenshot and walkthrough turn this into concrete shipped evidence of mission-led interface work rather than just a design description.',
+			'Led with the mission and kept the navigation and pacing quiet, so the first impression felt human instead of crypto-heavy.',
+			'Used a softer hero and lighter type to match the idea of connectivity as access, not a sales pitch.',
+			'Built and shipped the front-end.',
 		],
 		stack: ['Figma', 'Content strategy', 'Visual design', 'Responsive web'],
 		categories: ['design'],
 		links: [{label: 'Visit karrier.foundation', href: 'https://karrier.foundation/', external: true}],
 		evidence: {
-			role: 'designer and front-end contributor shaping the foundation-facing storytelling layer of the ecosystem.',
+			role: 'Designer and front-end on the foundation site.',
 			problem:
-				'The foundation needed to communicate a credible public-interest mission without feeling vague, overly corporate, or crypto-native in the wrong way.',
-			ownership:
-				'I focused on translating a technical mission into a calmer, more editorial web experience with clearer messaging, softer visual direction, and more accessible narrative pacing.',
+				'It needed to read as a real public-interest effort, not a corporate microsite or another crypto landing page.',
+			ownership: 'I focused on the tone, the messaging, and a calmer, more editorial layout.',
 			outcome:
-				'The work positioned the foundation as a serious initiative around connectivity access instead of just another ecosystem microsite, using a more trust-building visual language and less transactional product framing.',
-			artifact:
-				'Live site, hero capture, and a recorded walkthrough showing how the mission-led story unfolds through the shipped interface.',
+				'It positioned the foundation as a serious effort around connectivity access, with a more trustworthy feel than a typical product page.',
+			artifact: 'The live site, a hero capture, and a short screen recording.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/karrier-foundation-hero.jpg',
-				label: 'Karrier Foundation landing-page hero showing the Turning connectivity into a human right message and the calmer editorial visual direction.',
-				caption:
-					'Production hero section from the live Foundation site, showing the mission-first headline, soft atmospheric backdrop, and restrained navigation.',
+				label: 'The Karrier Foundation hero on the live site.',
+				caption: 'The hero on the live foundation site.',
 			},
 			{
 				type: 'video',
 				src: '/projects/karrier-foundation-walkthrough.mp4',
 				poster: '/projects/karrier-foundation-hero.jpg',
-				label: 'Screen-recorded walkthrough of the Karrier Foundation website showing the landing flow and mission-led pacing.',
-				caption:
-					'Short walkthrough of the live site that shows the actual visual pacing, transitions, and how the narrative moves beyond the opening hero.',
+				label: 'Screen recording of the Karrier Foundation site.',
+				caption: 'A short screen recording of the live site.',
 			},
 		],
-		note: 'Live production capture from karrier.foundation.',
+		note: 'Live capture from karrier.foundation.',
 	},
 	{
 		slug: 'karrier-dashboard',
 		title: 'Karrier One Dashboard',
-		eyebrow: 'Software product / product design',
+		eyebrow: 'Logged-in product',
 		summary:
-			'The dashboard is the operational layer behind Karrier One: identity, KYC, numbers, services, and deployment actions all meet in one logged-in product surface.',
-		sectionTitle: 'What mattered',
+			'The dashboard behind Karrier One. Identity, KYC, phone numbers, services, and on-network actions all live in one logged-in product.',
+		sectionTitle: 'What I did',
 		points: [
-			'The main design problem was blending web3 mechanics with familiar web2 product flows so users could complete high-friction tasks without feeling lost.',
-			'Key product surfaces include identity verification, account setup, service configuration, and operational actions around telecom hardware and rewards.',
-			'I treated this as both a UX and systems problem: the UI had to feel simple while still exposing real operational complexity.',
+			'The hard part was mixing crypto mechanics with normal web app flows, so people could finish high-friction tasks without getting lost.',
+			'Main surfaces: identity verification, account setup, service config, and the operational actions around the hardware and rewards.',
+			'Treated it as a UX and a systems problem. The interface had to stay simple while still exposing real operational detail.',
 		],
-		stack: ['TypeScript', 'React', 'Dashboard UX', 'Identity flows', 'Design systems'],
+		stack: ['TypeScript', 'React', '.NET', 'System design', 'Design systems'],
 		categories: ['design', 'software'],
 		featured: true,
 		featuredSummary:
-			'Product and front-end work across a telecom + web3 dashboard used for identity, service setup, and operational actions.',
+			'The logged-in product behind Karrier One. I worked the design and front-end for identity, service setup, and day-to-day operations.',
 		links: [
 			{label: 'Open dashboard', href: 'https://dashboard.karrier.one/', external: true},
 			{
@@ -189,32 +183,29 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'product lead, designer, and engineer on the logged-in operational product experience.',
+			role: 'Product lead, designer, and engineer on the logged-in product.',
 			problem:
-				'Users needed to move through identity, KYC, service, and network actions without getting buried under web3 complexity.',
+				'People needed to get through identity, KYC, service, and network actions without drowning in crypto complexity.',
 			ownership:
-				'I worked on the UX direction and product structure for flows that needed to feel simple while still reflecting real operational and telecom constraints.',
+				'I drove the UX direction and product structure for flows that had to feel simple but still reflect the real telecom and operational constraints.',
 			outcome:
-				'The dashboard supported real-time device analytics and revenue views across thousands of global nodes while aligning with product priorities tied to over $2.1M in cumulative on-chain revenue.',
-			artifact:
-				'Live dashboard, docs-backed KYC flow, and a product case study that speaks to UX, systems thinking, and operational tooling.',
+				'It ran real-time device analytics and revenue across thousands of nodes worldwide, tied to product work behind over $2.1M in on-chain revenue.',
+			artifact: 'The live dashboard, the docs-backed KYC flow, and the screens below.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/karrier-dashboard-home.jpg',
-				label: 'Karrier One dashboard home screen showing device revenue, venue health, client activity, and issue monitoring in the logged-in product.',
-				caption:
-					'Dashboard home view covering revenue by device, venue operations, client activity, and issue monitoring inside the Karrier One product.',
+				label: 'The Karrier One dashboard home screen.',
+				caption: 'The dashboard home: revenue by device, venue health, client activity, and issues.',
 				layout: 'half',
 				fit: 'contain',
 			},
 			{
 				type: 'image',
 				src: '/projects/karrier-dashboard-kns.jpg',
-				label: 'Karrier One KNS dashboard view showing number services, digital identity settings, asset management, and Karrier Pay flows.',
-				caption:
-					'KNS dashboard view covering number services, NFT identity, asset management, and Karrier Pay inside the same product system.',
+				label: 'The Karrier One KNS dashboard view.',
+				caption: 'The KNS view: number services, identity, asset management, and Karrier Pay.',
 				layout: 'half',
 				fit: 'contain',
 			},
@@ -223,20 +214,20 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'llm-assembly-platform',
 		title: 'LLM-Powered Assembly Guidance Platform',
-		eyebrow: 'Software engineering / capstone',
+		eyebrow: 'Capstone',
 		summary:
-			'As technical lead, I built a platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance through a retrieval-augmented LLM pipeline with citation-linked traceability.',
-		sectionTitle: 'Recruiter case study',
+			"My capstone. It takes a technical PDF and turns it into step-by-step assembly instructions, adapted to whoever's following along and cited back to the source. It runs on a RAG pipeline, with computer vision tracking your progress as you build.",
+		sectionTitle: 'What I did',
 		points: [
-			'Served as technical lead for the team, building a platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance via a retrieval-augmented LLM pipeline with citation-linked traceability.',
-			'Built the full TypeScript / React front-end and a Python OpenCV subsystem that tracks physical assembly progress from a live camera feed.',
-			'Added a text-to-speech mode for hands-busy use, and reduced assembly time in user testing.',
+			'I was the technical lead. The system reads a PDF and generates persona-adapted, step-by-step guidance through a retrieval-augmented LLM pipeline, with every step linked back to the source.',
+			'Built the full TypeScript and React front-end, plus a Python and OpenCV piece that tracks real assembly progress from a live camera.',
+			'Added a text-to-speech mode for when your hands are busy. It cut assembly time in user testing.',
 		],
 		stack: ['TypeScript', 'React', 'Python', 'OpenCV', 'RAG'],
 		categories: ['software'],
 		featured: true,
 		featuredSummary:
-			'A platform that ingests technical PDFs and generates persona-adapted, step-by-step assembly guidance through a retrieval-augmented LLM pipeline with citation-linked traceability.',
+			'My capstone. Reads a technical PDF and turns it into adapted, step-by-step assembly instructions with cited sources and live camera tracking.',
 		links: [
 			{
 				label: 'Open live demo',
@@ -250,38 +241,34 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'technical lead on a four-person capstone team, owning product definition, the TypeScript / React front-end, and the Python OpenCV subsystem.',
+			role: 'Technical lead on a four-person team. Owned product definition, the TypeScript and React front-end, and the Python and OpenCV piece.',
 			problem:
-				'Static manuals are hard to follow, difficult to personalize, and weak at handling real-time confusion, task state, and step-by-step context.',
+				"Static manuals are hard to follow, can't adapt to the person reading them, and don't help when you get stuck mid-task.",
 			ownership:
-				'I led the team and built the full TypeScript / React front-end plus a Python OpenCV subsystem, shaping how PDF parsing, retrieval-augmented generation, persona-adapted guidance, and live camera tracking fit into one coherent flow.',
+				'I led the team and built the front-end and the camera-tracking subsystem, and tied PDF parsing, retrieval, the adapted guidance, and live tracking into one flow.',
 			outcome:
-				'Shipped a live prototype that turns PDF input into cited steps, progress tracking, and camera-assisted validation, with a text-to-speech mode for hands-busy use. In showcase testing, the system reduced assembly completion time from 121 s to 109.5 s, a 9.05% improvement, and reached an illustrative SUS score of 78/100.',
-			artifact:
-				'Live Vercel demo, capstone proposal report, and a poster-backed showcase presentation from the University of Guelph capstone showcase.',
+				'We shipped a live prototype: PDF in, cited steps out, progress tracking, camera-assisted checks, and a hands-free voice mode. In showcase testing it dropped assembly time from 121 s to 109.5 s (9.05%) and reached a SUS score of 78 out of 100.',
+			artifact: 'The live demo, the proposal report, and the poster from the University of Guelph showcase.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/capstone-homepage.jpg',
-				label: 'Homepage of the live LLM Assembly Instruction Platform showing the product framing, assembly workflow, and product interface.',
-				caption:
-					'Homepage of the capstone product, designed around PDF-grounded instructions, 3D-assisted assembly, and step-by-step workflow control.',
+				label: 'The homepage of the live assembly platform.',
+				caption: 'The homepage of the live product.',
 			},
 			{
 				type: 'image',
 				src: '/projects/capstone-showcase-photo-upright.jpg',
-				label: 'Cole Mayke and the LLM Assembly Instruction Platform capstone team presenting their poster at the University of Guelph engineering showcase.',
-				caption:
-					'University of Guelph capstone showcase presentation with the project team, poster, and faculty advisor.',
+				label: 'Cole Mayke and the capstone team presenting at the University of Guelph showcase.',
+				caption: 'Our team presenting at the Guelph engineering showcase.',
 				layout: 'half',
 			},
 			{
 				type: 'image',
 				src: '/projects/capstone-poster.png',
-				label: 'Capstone poster for the LLM Assembly Instruction Platform highlighting the workflow, computer-vision support, and measured results.',
-				caption:
-					'Poster summarizing the system workflow, computer-vision-assisted assembly validation, and the 121 s to 109.5 s completion-time improvement shown during the showcase.',
+				label: 'The capstone poster.',
+				caption: 'The capstone poster: the workflow, the computer-vision checks, and the time result.',
 				layout: 'half',
 			},
 		],
@@ -289,14 +276,14 @@ export const portfolioProjects: PortfolioProject[] = [
 	{
 		slug: 'ecg-front-end',
 		title: 'Mixed-Signal ECG Front-End IC',
-		eyebrow: 'Electrical engineering / mixed-signal IC design',
+		eyebrow: 'Mixed-signal IC',
 		summary:
-			'I designed a smartwatch-oriented ECG front-end in TSMC 65 nm that combined a 3:1 CMOS mux, switched-cap PGA, and 6-bit SAR ADC under a 1 V supply.',
-		sectionTitle: 'Recruiter case study',
+			'A smartwatch ECG front-end in TSMC 65 nm. A 3:1 CMOS mux, a switched-cap PGA, and a 6-bit SAR ADC, all running on a 1 V supply.',
+		sectionTitle: 'What I did',
 		points: [
-			'Designed around a realistic smartwatch constraint set: 1 V battery supply, 20 mV maximum ECG amplitude, 10 kΩ source resistance, and low-power operation on TSMC 65 nm CMOS.',
-			'Integrated the analog path end-to-end, including the 3:1 mux, switched-cap PGA with gains of 1 through 4, a two-stage CMOS op-amp, and a 6-bit SAR ADC with Verilog-A control logic.',
-			'Verified the chain at block and top level using DC, AC, and transient simulation, then documented the design as a full ENGG 4080 mixed-signal project report.',
+			'Designed to a real smartwatch spec: 1 V supply, 20 mV max ECG amplitude, 10 kΩ source, low power, on TSMC 65 nm.',
+			'Built the whole analog path: the 3:1 mux, the switched-cap PGA with gains of 1 to 4, a two-stage op-amp, and a 6-bit SAR ADC with Verilog-A control.',
+			'Verified it at block and top level with DC, AC, and transient sims, then wrote it up as the full ENGG 4080 report.',
 		],
 		stack: ['Cadence Virtuoso', 'Spectre', 'Verilog-A', 'Mixed-signal simulation'],
 		categories: ['hardware'],
@@ -305,49 +292,47 @@ export const portfolioProjects: PortfolioProject[] = [
 			{label: 'Download related analog lab files', href: '/labs/nano-lab1.zip', download: true},
 		],
 		evidence: {
-			role: 'mixed-signal designer responsible for the analog front-end architecture, transistor-level implementation, and simulation/verification path.',
+			role: 'Mixed-signal designer. Owned the analog front-end, the transistor-level work, and verification.',
 			problem:
-				'The design had to resolve low-amplitude ECG signals around a 0.5 V common-mode level, provide programmable gain, and convert the output on-chip under a strict 1 V supply and low-power budget.',
+				'It had to pull low-amplitude ECG signals off a 0.5 V common-mode, give programmable gain, and convert on-chip, all under a strict 1 V, low-power budget.',
 			ownership:
-				'I designed the mux, the switched-cap PGA, the two-stage op-amp, the comparator path, the binary-weighted capacitor array, and the Verilog-A SAR control used to drive conversion.',
+				'I designed the mux, the switched-cap PGA, the two-stage op-amp, the comparator path, the capacitor array, and the Verilog-A SAR control.',
 			outcome:
-				'The design met the main project targets: about 40 dB open-loop op-amp gain, measured PGA gains of 1x to 4x within roughly 5-10% of ideal, a 6-bit ADC with 15.625 mV LSB and at least 105 samples/s, and expected analog front-end power well below 100 µW.',
+				'Hit the targets: about 40 dB op-amp gain, PGA gains of 1x to 4x within roughly 5-10% of ideal, a 6-bit ADC at 15.625 mV LSB and 105+ samples/s, and front-end power well under 100 µW.',
 			artifact:
-				'Full ENGG 4080 report with block diagrams, op-amp AC results, PGA gain stepping waveforms, top-level ADC simulation, and the Verilog-A SAR listing.',
+				'The full ENGG 4080 report: block diagrams, op-amp AC results, PGA waveforms, top-level ADC sims, and the Verilog-A listing.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/report-crops/ecg-pga-schematic-clean.jpg',
-				label: 'Cadence Virtuoso PGA schematic from the mixed-signal ECG front-end showing the switched-capacitor gain path and supporting circuitry.',
-				caption:
-					'Cadence PGA schematic from the ECG front-end, used as the lead artifact for the project because it shows the core gain stage and mixed-signal integration work directly.',
+				label: 'The PGA schematic from the ECG front-end in Cadence.',
+				caption: 'The PGA schematic in Cadence.',
 				layout: 'half',
 				fit: 'contain',
 			},
 			{
 				type: 'image',
 				src: '/projects/report-crops/ecg-mux-schematic-clean.jpg',
-				label: 'Cadence Virtuoso MUX schematic from the ECG front-end showing the transmission-gate input selection network.',
-				caption:
-					'MUX schematic from the same ECG front-end, showing the input-selection path that feeds the downstream PGA and ADC chain.',
+				label: 'The input mux schematic from the ECG front-end.',
+				caption: 'The input mux schematic.',
 				layout: 'half',
 				fit: 'contain',
 			},
 		],
-		note: 'Full mixed-signal report and related analog lab files are available above.',
+		note: 'Full report and analog lab files are linked above.',
 	},
 	{
 		slug: 'layout-verification',
 		title: 'Analog Front-End Layout & Verification',
-		eyebrow: 'Electrical engineering / physical design',
+		eyebrow: 'Physical design',
 		summary:
-			'I took a common-source CMOS amplifier through the full custom IC flow, ending with DRC, LVS, PEX, and post-layout validation in TSMC 65 nm.',
-		sectionTitle: 'Recruiter case study',
+			'Took a common-source CMOS amplifier through the full custom IC flow in TSMC 65 nm, all the way to DRC, LVS, PEX, and post-layout checks.',
+		sectionTitle: 'What I did',
 		points: [
-			'Executed the complete Virtuoso-to-Calibre flow: schematic capture, symbol generation, testbenching, layout drafting, DRC, LVS, PEX, and post-layout simulation.',
-			'Used schematic-driven layout plus manual place-and-route to keep interconnect short and parasitics controlled on TSMC 65 nm design rules.',
-			'Compared pre- and post-layout behaviour directly, treating layout as an electrical design problem rather than a final documentation step.',
+			'Ran the whole Virtuoso-to-Calibre flow: schematic, symbol, testbench, layout, DRC, LVS, PEX, and post-layout sim.',
+			'Used schematic-driven layout and hand place-and-route to keep wires short and parasitics down on 65 nm rules.',
+			'Compared pre- and post-layout directly, treating layout as an electrical problem, not just a formality.',
 		],
 		stack: ['Cadence Virtuoso', 'Calibre', 'Full custom layout', 'Post-layout analysis'],
 		categories: ['hardware'],
@@ -364,49 +349,47 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'physical design and verification owner for the analog block layout and post-layout checks.',
+			role: 'Owned the layout and verification for the analog block.',
 			problem:
-				'The challenge was to preserve amplifier behaviour through layout while staying clean on all foundry checks and minimizing routing parasitics.',
+				'Keep the amplifier behaving the same through layout while passing every foundry check and keeping routing parasitics low.',
 			ownership:
-				'I handled schematic-driven layout, manual place-and-route, DRC/LVS closure, and post-layout comparison against the original design intent.',
+				'I did the layout, the place-and-route, DRC and LVS closure, and the pre- and post-layout comparison against the original design.',
 			outcome:
-				'Closed DRC with no true rule violations, passed LVS with a full match, completed PEX successfully, and measured the midband gain drop from about 12 V/V pre-layout to about 10-11 V/V post-layout as the extracted parasitics shifted the dominant pole lower.',
+				'Clean DRC, a full LVS match, successful PEX, and a measured midband gain drop from about 12 V/V to 10-11 V/V post-layout as the parasitics pulled the dominant pole down.',
 			artifact:
-				'Full layout-verification report with final layout captures, DRC/LVS/PEX screenshots, extracted-view confirmation, and pre/post-layout AC, DC, and transient results.',
+				'The full report: final layout, DRC/LVS/PEX captures, the extracted view, and pre- and post-layout AC, DC, and transient results.',
 		},
 		media: [
 			{
 				type: 'image',
 				src: '/projects/report-crops/layout-final-layout-clean.jpg',
-				label: 'Cadence layout of the common-source amplifier showing final placement and routing before post-layout verification.',
-				caption:
-					'Final common-source amplifier layout captured from the layout-verification flow, used here as the lead artifact instead of the report cover.',
+				label: 'The final common-source amplifier layout.',
+				caption: 'The final amplifier layout.',
 				layout: 'half',
 				fit: 'contain',
 			},
 			{
 				type: 'image',
 				src: '/projects/report-crops/layout-common-source-schematic-clean.jpg',
-				label: 'Common-source amplifier schematic used as the pre-layout reference before DRC, LVS, PEX, and post-layout analysis.',
-				caption:
-					'Pre-layout common-source schematic paired with the final layout so the case study shows both the original circuit intent and the physical implementation.',
+				label: 'The pre-layout common-source schematic.',
+				caption: 'The pre-layout schematic, for reference.',
 				layout: 'half',
 				fit: 'contain',
 			},
 		],
-		note: 'Full layout report and supporting common-source files are available above.',
+		note: 'Full report and lab files are linked above.',
 	},
 	{
 		slug: 'aes-soc',
 		title: 'AES-128 SoC Coprocessor',
-		eyebrow: 'Electrical engineering / digital systems',
+		eyebrow: 'Digital systems',
 		summary:
-			'I built a memory-mapped AES-128 coprocessor with CBC and OFB support, verified it in simulation, and validated the HW/SW path against NIST test vectors.',
-		sectionTitle: 'Highlights',
+			'A memory-mapped AES-128 coprocessor with CBC and OFB modes. Verified in simulation and checked end-to-end against NIST test vectors on real hardware.',
+		sectionTitle: 'What I did',
 		points: [
-			'Defined a programmer-facing register map for keys, IVs, plaintext, and ciphertext transfer across the bus interface.',
-			'Paired the RTL with embedded C running on the HPS so the project behaved like a usable SoC peripheral instead of an isolated block.',
-			'Used simulation and hardware validation together to prove the design against real cipher-mode test vectors.',
+			'Defined the register map the programmer sees: keys, IVs, plaintext, and ciphertext over the bus.',
+			'Paired the RTL with embedded C on the HPS so it acted like a real SoC peripheral, not an isolated block.',
+			'Used simulation and on-hardware validation together to prove it against real cipher-mode vectors.',
 		],
 		stack: ['Verilog', 'SystemVerilog', 'ModelSim', 'HW/SW co-design'],
 		categories: ['hardware'],
@@ -418,29 +401,28 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'RTL and integration designer for the AES coprocessor and its programmer-facing SoC interface.',
+			role: 'RTL and integration on the AES coprocessor and its interface.',
 			problem:
-				'The coprocessor needed to behave like a usable SoC peripheral, not just a standalone RTL block, while supporting CBC and OFB verification flows.',
+				'It needed to behave like a usable SoC peripheral, not just an RTL block, and support CBC and OFB.',
 			ownership:
-				'I handled the RTL path, register-map thinking, the APB-style interface model, and end-to-end validation against embedded software and test vectors.',
+				'I did the RTL, the register map, the APB-style interface model, and the end-to-end validation against software and test vectors.',
 			outcome:
-				'Implemented a 16 x 32-bit register model, validated CBC and OFB operation against NIST 800-38A vectors, and exercised the design through both simulation and DE1-SoC hardware.',
-			artifact:
-				'Project summary and linked digital-systems archive covering the same RTL, interface, and hardware/software validation work.',
+				'Built a 16 x 32-bit register model, validated CBC and OFB against NIST 800-38A vectors, and ran it in both simulation and on DE1-SoC hardware.',
+			artifact: 'A project summary and the linked digital-systems archive.',
 		},
-		note: 'Related digital-design lab material is linked above.',
+		note: 'Related lab material is linked above.',
 	},
 	{
 		slug: 'fpga-digital-systems',
 		title: 'FPGA Digital Systems Design',
-		eyebrow: 'Electrical engineering / FPGA systems',
+		eyebrow: 'FPGA systems',
 		summary:
-			'I used DE1-SoC-based labs and project work to design and validate RTL modules, state machines, and memory-mapped interfaces for embedded FPGA systems.',
-		sectionTitle: 'Highlights',
+			'DE1-SoC lab and project work: RTL modules, state machines, and memory-mapped interfaces for embedded FPGA systems.',
+		sectionTitle: 'What I did',
 		points: [
-			'Worked across simulation and board-level validation rather than stopping at RTL-only design.',
-			'Used bus-oriented interfaces and hardware/software integration patterns that fed directly into later SoC work.',
-			'Built up a practical base in FPGA verification, register design, and embedded control flow.',
+			'Worked across simulation and on-board validation, not just RTL on paper.',
+			'Used bus interfaces and hardware/software patterns that fed straight into the later SoC work.',
+			'Built up a real base in FPGA verification, register design, and embedded control.',
 		],
 		stack: ['Verilog', 'DE1-SoC', 'Quartus', 'Embedded systems'],
 		categories: ['hardware'],
@@ -452,17 +434,14 @@ export const portfolioProjects: PortfolioProject[] = [
 			},
 		],
 		evidence: {
-			role: 'FPGA and embedded-systems student building up reusable RTL, simulation, and board-debug skills.',
-			problem:
-				'The work focused on turning digital design concepts into reliable modules that behave correctly in simulation and on hardware.',
+			role: 'FPGA and embedded coursework, building reusable RTL, simulation, and board-debug skills.',
+			problem: 'Turn digital design concepts into modules that actually behave in simulation and on hardware.',
 			ownership:
-				'I designed and validated registers, state machines, and memory-mapped interfaces while working across Quartus, ModelSim, and board-level testing.',
-			outcome:
-				'This work became the practical foundation for later SoC integration, verification, and hardware/software co-design projects.',
-			artifact:
-				'Embedded lab archive covering the same board-level RTL, interface, and validation work summarized here.',
+				'I designed and checked registers, state machines, and memory-mapped interfaces across Quartus, ModelSim, and the board.',
+			outcome: 'This became the base for the later SoC integration and hardware/software work.',
+			artifact: 'An embedded lab archive covering the same work.',
 		},
-		note: 'Supporting FPGA coursework and lab material are linked here.',
+		note: 'Supporting FPGA coursework is linked here.',
 	},
 ];
 
@@ -471,42 +450,44 @@ export const portfolioTracks: PortfolioTrack[] = [
 		slug: 'design',
 		label: 'Design',
 		href: '/projects/design',
-		landingDescription: 'Product storytelling, interface systems, and brand-to-UX translation across telecom and web3 surfaces.',
+		landingDescription:
+			'Marketing sites, dashboards, and the interface calls that make telecom and crypto products usable.',
 		pageEyebrow: 'Projects / design',
 		pageTitle: 'Design engineering work',
-		pageDescription:
-			'This track focuses on product framing, information hierarchy, and the interface decisions that made complex systems feel usable.',
+		pageDescription: 'Product framing, hierarchy, and the interface decisions that make complex systems usable.',
 		introMessages: [
-			'I use design to make dense technical systems legible.',
-			'Mostly landing pages, dashboards, and interface systems for telecom and web3 products.',
+			'I use design to make dense technical products make sense.',
+			'Mostly landing pages, dashboards, and interfaces for telecom and crypto.',
 		],
 	},
 	{
 		slug: 'software',
 		label: 'Software',
 		href: '/projects/software',
-		landingDescription: 'AI-assisted products, operational tooling, and full-stack systems built around real user workflows.',
+		landingDescription:
+			'AI products, internal tooling, and full-stack systems built around how people actually work.',
 		pageEyebrow: 'Projects / software',
 		pageTitle: 'Software engineering work',
 		pageDescription:
-			'This track emphasizes application logic, system behavior, product workflows, and the front-end/backend integration behind them.',
+			'Application logic, system behavior, product flows, and the front-end and back-end glue between them.',
 		introMessages: [
-			'I build product workflows where front-end experience and system behavior have to work together.',
-			'Mostly AI-assisted products, operational tooling, and full-stack application work.',
+			'I build products where the front-end and the system behind it have to work as one.',
+			'Mostly AI products, internal tooling, and full-stack work.',
 		],
 	},
 	{
 		slug: 'hardware',
 		label: 'Hardware',
 		href: '/projects/hardware',
-		landingDescription: 'Mixed-signal IC design, custom layout verification, RTL, FPGA systems, and hardware-software co-design.',
+		landingDescription:
+			'Mixed-signal IC design, custom layout and verification, RTL, and FPGA systems.',
 		pageEyebrow: 'Projects / hardware',
 		pageTitle: 'Hardware engineering work',
 		pageDescription:
-			'This track covers the semiconductor and digital-systems side of my work, from analog block design through verification and hardware-software integration.',
+			'The semiconductor and digital-systems side, from analog blocks through verification and hardware/software integration.',
 		introMessages: [
-			'My hardware work spans mixed-signal IC design, physical verification, RTL, and FPGA systems.',
-			'These case studies focus on architecture, simulation, and verification results.',
+			'My hardware work runs from mixed-signal IC design to physical verification, RTL, and FPGA systems.',
+			'These are about architecture, simulation, and verification.',
 		],
 	},
 ];
@@ -516,78 +497,56 @@ export const portfolioTrackProjects: Record<PortfolioCategory, PortfolioTrackPro
 		{
 			slug: 'karrier-one-main-site',
 			tier: 'featured',
-			summary: 'A landing experience built to explain decentralized telecom infrastructure without overwhelming first-time visitors.',
-			problem:
-				'How do you explain telecom infrastructure, digital identity, and web3 mechanics without losing the user in the first scroll?',
-			shipped:
-				'I helped simplify the narrative, shape the page hierarchy, and ship a production landing flow with stronger pacing and clearer calls to action.',
+			summary:
+				'The Karrier One brand, design system, and public site, built to explain decentralized telecom without burying a first-time visitor.',
 		},
 		{
 			slug: 'karrier-dashboard',
 			tier: 'featured',
-			summary: 'A logged-in product surface for identity, KYC, services, numbers, and operational telecom actions.',
-			problem:
-				'How do you make KYC, identity, and service-management flows feel usable when the underlying system is operationally dense?',
-			shipped:
-				'I worked on the UX direction and front-end structure so the dashboard felt calmer, clearer, and more legible for real product workflows.',
+			summary: 'The logged-in product for identity, KYC, services, numbers, and network actions.',
 		},
 		{
 			slug: 'karrier-foundation',
 			tier: 'supporting',
-			summary:
-				'A mission-first site that reframed decentralized connectivity as public-interest infrastructure with softer pacing and more editorial storytelling.',
+			summary: 'The foundation site, framing decentralized connectivity as access rather than a product pitch.',
 		},
 	],
 	software: [
 		{
 			slug: 'llm-assembly-platform',
 			tier: 'featured',
-			summary: 'A platform that turns technical PDFs into persona-adapted, step-by-step assembly guidance with progress tracking and camera-assisted validation.',
-			problem:
-				'How do you turn static manuals into a live workflow that can adapt instructions, answer questions, and track assembly progress in context?',
-			shipped:
-				'I led the user-facing workflow and helped ship a live prototype that parses PDFs, generates cited steps, and supports progress tracking plus vision-assisted validation.',
+			summary:
+				'Turns technical PDFs into adapted, step-by-step assembly instructions using RAG, with computer-vision progress tracking.',
 		},
 		{
 			slug: 'karrier-dashboard',
 			tier: 'featured',
-			summary: 'A TypeScript-heavy product surface that ties identity, services, analytics, and telecom operations into one logged-in system.',
-			problem:
-				'How do you support identity, service setup, analytics, and device operations in one product without burying users in system complexity?',
-			shipped:
-				'I worked across the React/TypeScript front-end and product structure for flows tied to KYC, service setup, and operational tooling around live network activity.',
+			summary:
+				'A TypeScript-heavy product tying identity, services, analytics, and telecom operations into one logged-in system.',
 		},
 	],
 	hardware: [
 		{
 			slug: 'ecg-front-end',
 			tier: 'featured',
-			summary: 'A smartwatch-oriented mixed-signal ECG front-end integrating analog acquisition, programmable gain, and SAR conversion under a 1 V supply.',
-			problem:
-				'How do you acquire low-amplitude ECG signals and digitize them on-chip under a strict 1 V, low-power constraint?',
-			shipped:
-				'I designed and verified the analog chain end-to-end, from mux and PGA through op-amp and SAR ADC, then documented the final system in a full report.',
+			summary:
+				'A smartwatch ECG front-end: analog acquisition, programmable gain, and SAR conversion on a 1 V supply.',
 		},
 		{
 			slug: 'layout-verification',
 			tier: 'featured',
-			summary: 'A full custom layout and verification flow for an analog amplifier in TSMC 65 nm, from drafting through extracted validation.',
-			problem:
-				'How do you carry an analog design through layout, DRC, LVS, and extraction without losing the behavior that mattered at schematic level?',
-			shipped:
-				'I completed layout, rule closure, extraction, and post-layout comparison so the design was validated as both geometry and electrical behavior.',
+			summary: 'A full custom layout and verification pass for an analog amplifier in TSMC 65 nm.',
 		},
 		{
 			slug: 'aes-soc',
 			tier: 'supporting',
-			summary:
-				'A memory-mapped AES-128 coprocessor verified against NIST vectors in simulation and exercised through the HW/SW SoC path.',
+			summary: 'A memory-mapped AES-128 coprocessor checked against NIST vectors in simulation and on hardware.',
 		},
 		{
 			slug: 'fpga-digital-systems',
 			tier: 'supporting',
 			summary:
-				'FPGA and embedded systems work covering RTL modules, memory-mapped interfaces, simulation, and board-level validation on DE1-SoC hardware.',
+				'FPGA and embedded work: RTL, memory-mapped interfaces, simulation, and board-level validation on DE1-SoC.',
 		},
 	],
 };
@@ -611,7 +570,7 @@ export const portfolioDownloads: PortfolioDownload[] = [
 	{
 		title: 'ENGG 4080 Layout Verification Report',
 		description:
-			'Full layout drafting and verification report covering DRC, LVS, PEX, and post-layout simulation of a common-source amplifier.',
+			'Full layout and verification report covering DRC, LVS, PEX, and post-layout simulation of a common-source amplifier.',
 		fileType: 'PDF',
 		href: '/projects/layout-verification-report.pdf',
 	},
@@ -635,7 +594,7 @@ export const portfolioDownloads: PortfolioDownload[] = [
 	},
 	{
 		title: 'Common-Source Lab Files',
-		description: 'Supporting artifacts for the common-source analog design and analysis work.',
+		description: 'Supporting files for the common-source analog design and analysis work.',
 		fileType: 'ZIP',
 		href: '/labs/lab1-nano-common-source.zip',
 	},

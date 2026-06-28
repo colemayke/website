@@ -8,6 +8,22 @@ export type ConversationTurn =
 	| {kind: 'reply'; key: string; messages: Array<{key: string; content: ReactNode}>}
 	| {kind: 'block'; key: string; content: ReactNode};
 
+// A chat image that fluidly grows on hover (the bubble grows with it, since
+// the bubble is sized to fit its content) so you can actually see it.
+export function ChatImage({src, alt, className}: {src: string; alt: string; className?: string}) {
+	return (
+		<img
+			src={src}
+			alt={alt}
+			loading="lazy"
+			className={clsx(
+				'block max-w-full cursor-zoom-in rounded-lg border border-neutral-200 transition-all duration-300 ease-out dark:border-neutral-800',
+				className,
+			)}
+		/>
+	);
+}
+
 const enter = {
 	initial: {opacity: 0, y: 10, scale: 0.98},
 	animate: {opacity: 1, y: 0, scale: 1},
@@ -214,7 +230,7 @@ export function Conversation({turns}: {turns: ConversationTurn[]}) {
 	}, [reduce, total]);
 
 	const hasMore = completed < total;
-	const idleHint = hasMore ? 'Tap or press ↓ to continue…' : 'iMessage';
+	const idleHint = hasMore ? 'Tap or press ↓ to continue…' : "You've reached the end.";
 
 	const onBarClick = () => {
 		if (!playingRef.current && completedRef.current < total) {

@@ -2,25 +2,18 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {type ReactNode, useEffect} from 'react';
-import {Conversation, type ConversationTurn} from './conversation';
+import {ChatImage, Conversation, type ConversationTurn} from './conversation';
 import {
 	getCaseStudyHref,
 	getTrackProjects,
 	portfolioDownloads,
 	portfolioTracks,
 	type PortfolioCategory,
-	type PortfolioEvidence,
 	type PortfolioLink,
 	type PortfolioMedia,
 	type PortfolioProject,
 	type PortfolioTrackProject,
 } from '../utils/portfolio';
-
-const categoryLabels: Record<PortfolioCategory, string> = {
-	design: 'Design',
-	software: 'Software',
-	hardware: 'Hardware',
-};
 
 const trackPrompts: Record<PortfolioCategory, string> = {
 	design: 'What design work have you done?',
@@ -46,43 +39,27 @@ function ExternalAction({link}: {link: PortfolioLink}) {
 	);
 }
 
-function EvidenceCard({
-	label,
-	value,
-}: {
-	label: keyof PortfolioEvidence;
-	value: string;
-}) {
-	return (
-		<div className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-3 dark:border-neutral-800 dark:bg-neutral-900/70">
-			<p className="text-[11px] capitalize text-neutral-500 dark:text-neutral-400">
-				{label}
-			</p>
-			<p className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">{value}</p>
-		</div>
-	);
-}
-
-function ProjectMediaFigure({
-	media,
-	variant = 'case-study',
-}: {
-	media: PortfolioMedia;
-	variant?: 'case-study' | 'teaser';
-}) {
-	const sharedClassName =
-		variant === 'teaser'
-			? clsx(
-					'h-60 w-full md:h-64',
-					media.fit === 'contain' ? 'object-contain' : 'object-cover object-top',
-				)
-			: 'h-[320px] w-full object-contain md:h-[420px]';
+function CaseMedia({media}: {media: PortfolioMedia}) {
+	const isContain = media.fit === 'contain';
 
 	return (
-		<figure className="flex h-full flex-col overflow-hidden rounded-[24px] border border-neutral-200 bg-neutral-50/80 p-2 dark:border-neutral-800 dark:bg-neutral-900/70">
-			<div className="overflow-hidden rounded-[18px] bg-neutral-100 dark:bg-neutral-950">
+		<figure className="mx-auto max-w-4xl">
+			<div
+				className={clsx(
+					'overflow-hidden rounded-[28px] border border-neutral-200 dark:border-neutral-800',
+					isContain ? 'bg-neutral-50 dark:bg-neutral-900' : 'bg-neutral-100 dark:bg-neutral-950',
+				)}
+			>
 				{media.type === 'image' ? (
-					<img src={media.src} alt={media.label} loading="lazy" className={sharedClassName} />
+					<img
+						src={media.src}
+						alt={media.label}
+						loading="lazy"
+						className={clsx(
+							'w-full',
+							isContain ? 'max-h-[72vh] object-contain' : 'h-auto object-cover',
+						)}
+					/>
 				) : (
 					<video
 						src={media.src}
@@ -91,14 +68,14 @@ function ProjectMediaFigure({
 						preload="metadata"
 						playsInline
 						aria-label={media.label}
-						className={clsx(sharedClassName, 'bg-neutral-950')}
+						className="w-full bg-neutral-950"
 					>
 						Your browser does not support embedded video playback.
 					</video>
 				)}
 			</div>
-			{media.caption && variant === 'case-study' ? (
-				<figcaption className="px-2 pb-1 pt-3 text-xs leading-5 text-neutral-500 dark:text-neutral-400">
+			{media.caption ? (
+				<figcaption className="mt-4 text-center text-sm leading-6 text-neutral-500 dark:text-neutral-400">
 					{media.caption}
 				</figcaption>
 			) : null}
@@ -129,13 +106,12 @@ function projectBubbles(
 					{
 						key: `${project.slug}-media`,
 						content: (
-							<div className="mt-1 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800">
-								<img
+							<div className="mt-1">
+								<ChatImage
 									src={media.src}
 									alt={media.label}
-									loading="lazy"
 									className={clsx(
-										'h-40 w-72 max-w-full',
+										'h-40 w-72 hover:h-60 hover:w-[24rem]',
 										media.fit === 'contain'
 											? 'bg-neutral-50 object-contain dark:bg-neutral-950'
 											: 'object-cover object-top',
@@ -319,112 +295,103 @@ export function PortfolioCaseStudyPage({project}: {project: PortfolioProject}) {
 		}
 	}, [normalizedTrack]);
 
+	const media = project.media ?? [];
+	const leadMedia = media[0];
+	const restMedia = media.slice(1);
+
 	return (
-		<div className="space-y-8">
-			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<div className="flex flex-wrap gap-2">
+		<article className="space-y-16 pb-4 md:space-y-24">
+			<header className="mx-auto max-w-2xl pt-2 text-center">
+				<div className="flex flex-wrap items-center justify-center gap-2">
 					<Link
 						href="/projects"
-						className="rounded-full border border-neutral-300 px-2.5 py-1 text-[11px] text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
+						className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
 					>
 						All work
 					</Link>
-					{project.categories.map(category => (
-						<Link
-							key={`${project.slug}-${category}`}
-							href={`/projects/${category}`}
-							className={clsx(
-								'rounded-full border px-2.5 py-1 text-[11px] transition-colors',
-								normalizedTrack === category
-									? 'border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-900'
-									: 'border-neutral-200 text-neutral-500 hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100',
-							)}
-						>
-							{categoryLabels[category]}
-						</Link>
-					))}
+					<Link
+						href="/"
+						className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-100 dark:hover:text-neutral-100"
+					>
+						Home
+					</Link>
 				</div>
 
-				<p className="mt-5 text-xs text-neutral-500 dark:text-neutral-400">
-					{project.eyebrow}
-				</p>
-				<h1 className="mt-2 text-4xl font-semibold tracking-tight leading-tight text-neutral-900 dark:text-neutral-100">
+				<p className="mt-10 text-sm text-neutral-500 dark:text-neutral-400">{project.eyebrow}</p>
+				<h1 className="mt-3 text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-6xl">
 					{project.title}
 				</h1>
-				<p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+				<p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">
 					{project.summary}
 				</p>
 
 				{project.links.length ? (
-					<div className="mt-5 flex flex-wrap gap-2">
+					<div className="mt-7 flex flex-wrap justify-center gap-2">
 						{project.links.map(link => (
 							<ExternalAction key={`${project.slug}-${link.href}`} link={link} />
 						))}
 					</div>
 				) : null}
+			</header>
+
+			{leadMedia ? <CaseMedia media={leadMedia} /> : null}
+
+			<section className="mx-auto max-w-2xl">
+				<h2 className="text-center text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl">
+					{project.sectionTitle}
+				</h2>
+				<div className="mt-8 space-y-5">
+					{project.points.map(point => (
+						<p key={point} className="text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+							{point}
+						</p>
+					))}
+				</div>
 			</section>
 
-			{project.media?.length ? (
-				<section className="grid gap-3 md:grid-cols-2">
-					{project.media.map(media => (
-						<div
-							key={`${project.slug}-${media.src}`}
-							className={clsx(media.layout === 'half' ? 'md:col-span-1' : 'md:col-span-2')}
-						>
-							<ProjectMediaFigure media={media} />
-						</div>
+			{restMedia.length ? (
+				<section className="space-y-10">
+					{restMedia.map(item => (
+						<CaseMedia key={`${project.slug}-${item.src}`} media={item} />
 					))}
 				</section>
 			) : null}
 
-			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs text-neutral-500 dark:text-neutral-400">
-					{project.sectionTitle}
+			<section className="mx-auto max-w-2xl text-center">
+				<p className="text-sm text-neutral-500 dark:text-neutral-400">Outcome</p>
+				<p className="mt-4 text-2xl font-medium leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 md:text-[1.75rem] md:leading-[1.4]">
+					{project.evidence.outcome}
 				</p>
-				<ul className="mt-3 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-					{project.points.map(point => (
-						<li key={point} className="flex gap-3">
-							<span className="mt-[0.45rem] size-1.5 shrink-0 rounded-full bg-neutral-400 dark:bg-neutral-500" />
-							<span>{point}</span>
-						</li>
-					))}
-				</ul>
 			</section>
 
-			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs text-neutral-500 dark:text-neutral-400">
-					Stack
-				</p>
-				<div className="mt-3 flex flex-wrap gap-2">
-					{project.stack.map(item => (
-						<span
-							key={`${project.slug}-${item}`}
-							className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
-						>
-							{item}
-						</span>
-					))}
-				</div>
-			</section>
-
-			<section className="rounded-[32px] border border-neutral-200 bg-white/85 p-5 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
-				<p className="text-xs text-neutral-500 dark:text-neutral-400">
-					Evidence
-				</p>
-				<div className="mt-3 grid gap-3 md:grid-cols-2">
-					<EvidenceCard label="role" value={project.evidence.role} />
-					<EvidenceCard label="problem" value={project.evidence.problem} />
-					<EvidenceCard label="ownership" value={project.evidence.ownership} />
-					<EvidenceCard label="outcome" value={project.evidence.outcome} />
-					<div className="md:col-span-2">
-						<EvidenceCard label="artifact" value={project.evidence.artifact} />
+			<section className="mx-auto max-w-2xl border-t border-neutral-200 pt-10 dark:border-neutral-800">
+				<dl className="grid gap-8 sm:grid-cols-2">
+					<div>
+						<dt className="text-sm text-neutral-500 dark:text-neutral-400">Role</dt>
+						<dd className="mt-2 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+							{project.evidence.role}
+						</dd>
 					</div>
-				</div>
+					<div>
+						<dt className="text-sm text-neutral-500 dark:text-neutral-400">Built with</dt>
+						<dd className="mt-3 flex flex-wrap gap-2">
+							{project.stack.map(item => (
+								<span
+									key={`${project.slug}-${item}`}
+									className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+								>
+									{item}
+								</span>
+							))}
+						</dd>
+					</div>
+				</dl>
+				{project.note ? (
+					<p className="mt-8 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+						{project.note}
+					</p>
+				) : null}
 			</section>
-
-			{project.note ? (
-				<p className="text-sm leading-6 text-neutral-500 dark:text-neutral-400">{project.note}</p>
-			) : null}
-		</div>
+		</article>
 	);
 }
