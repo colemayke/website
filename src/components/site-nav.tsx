@@ -25,8 +25,8 @@ export function SiteNav({currentPath}: {currentPath: string}) {
 				</p>
 			</div>
 
-			<div className="flex items-center gap-2">
-				<nav className="flex items-center gap-1 rounded-full border border-neutral-200 bg-white/80 p-1 text-sm shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
+			<div className="flex w-full min-w-0 items-center justify-end gap-2 sm:w-auto">
+				<nav className="flex min-w-0 flex-wrap items-center justify-center gap-1 rounded-3xl border border-neutral-200 bg-white/80 p-1 text-sm shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80 sm:flex-nowrap sm:rounded-full">
 					{navItems.map(item => (
 						<Link
 							key={item.href}
