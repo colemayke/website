@@ -10,7 +10,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"usage": "node scripts/generate-claude-usage.mjs"
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.7",

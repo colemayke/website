@@ -19,6 +19,11 @@ const DynamicFlightMap = dynamic(
 	{ssr: false},
 );
 
+const DynamicClaudeActivity = dynamic(
+	() => import('../components/claude-activity').then(mod => mod.ClaudeActivity),
+	{ssr: false},
+);
+
 const pillLink =
 	'inline-flex items-center rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-neutral-100';
 
@@ -119,16 +124,13 @@ export default function Home() {
 				{
 					key: 'life-benny',
 					content: (
-						<>
-							<div className="mt-1">
-								<ChatImage
-									src={benny.src}
-									alt="Benny, my Shiba Inu"
-									className="h-auto w-56 object-cover hover:w-80"
-								/>
-							</div>
-							<p className="mt-2 text-left">Meet Benny.</p>
-						</>
+						<div className="mt-1">
+							<ChatImage
+								src={benny.src}
+								alt="Benny, my Shiba Inu"
+								className="h-auto w-56 object-cover hover:w-80"
+							/>
+						</div>
 					),
 				},
 			],
@@ -191,6 +193,8 @@ export default function Home() {
 		{kind: 'block', key: 'now-playing', content: <DynamicNowPlaying />},
 		{kind: 'prompt', key: 'q-travel', text: 'Where have you traveled?'},
 		{kind: 'block', key: 'flights', content: <DynamicFlightMap />},
+		{kind: 'prompt', key: 'q-claude', text: 'How much do you use Claude?'},
+		{kind: 'block', key: 'claude-activity', content: <DynamicClaudeActivity />},
 		{
 			kind: 'reply',
 			key: 'stats',

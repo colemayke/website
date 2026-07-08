@@ -27,3 +27,10 @@ out
 
 # Cloud9 IDE files
 .c9
+
+# Raw Claude data export — contains actual conversation text, never commit.
+# Only the aggregated per-day counts in data/claude-usage/ and public/claude-usage.json are committed.
+data/claude-export/
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
