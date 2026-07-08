@@ -338,24 +338,13 @@ export function ClaudeActivity() {
 		[realDays],
 	);
 
-	const [tip, setTip] = useState<{x: number; y: number; label: string} | null>(null);
+	const [tip, setTip] = useState<{x: number; y: number; day: Day} | null>(null);
 
 	const cardRef = useRef<HTMLDivElement>(null);
 	const inView = useInView(cardRef, {once: true, margin: '-64px'});
 
 	const show = (event: React.MouseEvent, day: Day) => {
-		let label: string;
-		if (day.messages === 0) {
-			label = `No activity · ${formatDate(day.date)}`;
-		} else {
-			const sources: string[] = [];
-			if (day.codeTokens > 0) sources.push(`${formatTokens(day.codeTokens)} Code`);
-			if (day.designTokens > 0) sources.push(`${formatTokens(day.designTokens)} Design`);
-			if (day.chatTokens > 0) sources.push(`${formatTokens(day.chatTokens)} Chat`);
-			const tokens = `${formatTokens(day.tokens)} tokens${sources.length ? ` (${sources.join(', ')})` : ''}`;
-			label = `${day.messages} message${day.messages === 1 ? '' : 's'} · ${tokens} · ${formatDate(day.date)}`;
-		}
-		setTip({x: event.clientX, y: event.clientY, label});
+		setTip({x: event.clientX, y: event.clientY, day});
 	};
 
 	// On narrow screens the grid overflows horizontally — start scrolled to the
@@ -459,14 +448,45 @@ export function ClaudeActivity() {
 				{modeledDays > 7 ? <> Earlier days are modeled.</> : null}
 			</p>
 
-			{tip ? (
-				<div
-					className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full rounded-lg bg-neutral-900 px-2.5 py-1.5 text-xs font-medium text-white shadow-lg dark:bg-neutral-100 dark:text-neutral-900"
-					style={{left: tip.x, top: tip.y - 10}}
-				>
-					{tip.label}
+			{tip ? <DayTooltip x={tip.x} y={tip.y} day={tip.day} /> : null}
+		</div>
+	);
+}
+
+// The per-day stats card shown on hover: date header, then message count and a
+// per-tool token breakdown, each on its own row.
+function DayTooltip({x, y, day}: {x: number; y: number; day: Day}) {
+	const rows: Array<{label: string; value: string}> = [];
+	if (day.messages > 0) {
+		rows.push({label: 'Messages', value: day.messages.toLocaleString()});
+		rows.push({label: 'Tokens', value: formatTokens(day.tokens)});
+		if (day.codeTokens > 0) rows.push({label: 'Claude Code', value: formatTokens(day.codeTokens)});
+		if (day.designTokens > 0) rows.push({label: 'Claude Design', value: formatTokens(day.designTokens)});
+		if (day.chatTokens > 0) rows.push({label: 'Chat', value: formatTokens(day.chatTokens)});
+	}
+
+	return (
+		<div
+			className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full rounded-xl bg-neutral-900 px-3 py-2 text-xs shadow-lg dark:bg-neutral-100"
+			style={{left: x, top: y - 10}}
+		>
+			<p className="whitespace-nowrap font-semibold text-white dark:text-neutral-900">
+				{formatDate(day.date)}
+			</p>
+			{rows.length ? (
+				<div className="mt-1.5 space-y-1">
+					{rows.map(row => (
+						<div key={row.label} className="flex items-center justify-between gap-6">
+							<span className="text-neutral-400 dark:text-neutral-500">{row.label}</span>
+							<span className="font-medium tabular-nums text-white dark:text-neutral-900">
+								{row.value}
+							</span>
+						</div>
+					))}
 				</div>
-			) : null}
+			) : (
+				<p className="mt-0.5 text-neutral-400 dark:text-neutral-500">No activity</p>
+			)}
 		</div>
 	);
 }
