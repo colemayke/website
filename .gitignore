@@ -34,3 +34,9 @@ data/claude-export/
 
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo
+
+# Raw Anthropic data export — ALL private chat content. NEVER commit.
+claude data/
+/claude data/
+**/claude data/
+claude-data/
