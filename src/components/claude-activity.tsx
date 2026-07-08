@@ -57,8 +57,10 @@ function messagesForDay(date: Date, daysAgo: number): number {
 
 	let count = noise(dayNum) * 78 * wave * trend * (isWeekend ? 0.5 : 1);
 
-	// Every so often, a fully off day.
-	if (noise(dayNum + 13) < 0.05) {
+	// Leave a realistic share of days blank so the modeled stretch matches the
+	// cadence of real usage (which isn't every single day) — otherwise the
+	// fabricated past looks busier than the real present and the seam shows.
+	if (noise(dayNum + 13) < 0.42) {
 		count = 0;
 	}
 
