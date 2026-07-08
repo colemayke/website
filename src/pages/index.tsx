@@ -193,7 +193,7 @@ export default function Home() {
 		{kind: 'block', key: 'now-playing', content: <DynamicNowPlaying />},
 		{kind: 'prompt', key: 'q-travel', text: 'Where have you traveled?'},
 		{kind: 'block', key: 'flights', content: <DynamicFlightMap />},
-		{kind: 'prompt', key: 'q-claude', text: 'How much do you use Claude?'},
+		{kind: 'prompt', key: 'q-claude', text: 'Show me your Claude usage'},
 		{kind: 'block', key: 'claude-activity', content: <DynamicClaudeActivity />},
 		{
 			kind: 'reply',
