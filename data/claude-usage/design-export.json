@@ -1,0 +1,101 @@
+{
+	"generatedAt": "2026-07-08T18:08:07.164Z",
+	"days": {
+		"2026-04-21": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 151,
+			"designTokens": 0
+		},
+		"2026-04-22": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 23,
+			"designTokens": 0
+		},
+		"2026-04-23": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 64,
+			"designTokens": 0
+		},
+		"2026-04-24": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 1,
+			"designTokens": 0
+		},
+		"2026-04-27": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 20,
+			"designTokens": 0
+		},
+		"2026-04-28": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 2,
+			"designTokens": 0
+		},
+		"2026-04-29": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 28,
+			"designTokens": 0
+		},
+		"2026-05-01": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 38,
+			"designTokens": 0
+		},
+		"2026-05-04": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 125,
+			"designTokens": 0
+		},
+		"2026-05-05": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 19,
+			"designTokens": 0
+		},
+		"2026-05-15": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 36,
+			"designTokens": 0
+		},
+		"2026-06-09": {
+			"messages": 0,
+			"codeTokens": 0,
+			"chatMessages": 0,
+			"chatTokens": 0,
+			"designMessages": 10,
+			"designTokens": 0
+		}
+	}
+}

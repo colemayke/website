@@ -30,10 +30,37 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_PATH = join(ROOT, 'public', 'claude-usage.json');
 const SOURCES_DIR = join(ROOT, 'data', 'claude-usage');
 const PROJECTS_DIR = join(homedir(), '.claude', 'projects');
-const CHAT_EXPORT_PATH = join(ROOT, 'data', 'claude-export', 'conversations.json');
+// The raw Anthropic export ("Export data" from claude.ai). Auto-detected in a
+// couple of gitignored locations so the private content never gets committed.
+const EXPORT_DIRS = [join(ROOT, 'claude data'), join(ROOT, 'data', 'claude-export')];
 
-const EMPTY = () => ({messages: 0, codeTokens: 0, chatMessages: 0, chatTokens: 0});
+// `messages`/`codeTokens` = Claude Code; chat/design tracked separately. Every
+// per-source file only ever holds these daily counts — no conversation text.
+const EMPTY = () => ({
+	messages: 0,
+	codeTokens: 0,
+	chatMessages: 0,
+	chatTokens: 0,
+	designMessages: 0,
+	designTokens: 0,
+});
 const FIELDS = Object.keys(EMPTY());
+
+// The export has no token counts; ~4 characters per token is a fair estimate.
+function estimateTokens(text) {
+	return Math.round((text?.length ?? 0) / 4);
+}
+
+// A message's text lives in `text` or as blocks in `content`; concatenate both.
+function messageText(message) {
+	if (typeof message.text === 'string' && message.text) return message.text;
+	const content = message.content;
+	if (typeof content === 'string') return content;
+	if (Array.isArray(content)) {
+		return content.map(block => (typeof block?.text === 'string' ? block.text : '')).join(' ');
+	}
+	return '';
+}
 
 // Local calendar date (matches how the heatmap builds its grid).
 function ymd(date) {
@@ -124,25 +151,56 @@ if (existsSync(PROJECTS_DIR)) {
 	}
 }
 
-// --- 2. Optional claude.ai chat export ---
-let chatRecords = 0;
-if (existsSync(CHAT_EXPORT_PATH)) {
-	const days = {};
-	for (const conversation of JSON.parse(readFileSync(CHAT_EXPORT_PATH, 'utf8'))) {
-		for (const message of conversation.chat_messages ?? []) {
-			if (!message.created_at) continue;
-			const key = ymd(new Date(message.created_at));
-			days[key] ??= EMPTY();
-			days[key].chatMessages += 1;
-			// The export has no token counts; ~4 chars per token is close enough.
-			days[key].chatTokens += Math.round((message.text ?? '').length / 4);
-			chatRecords += 1;
+// --- 2. Optional Anthropic data export (claude.ai chats + Claude Design) ---
+const exportRoot = EXPORT_DIRS.find(existsSync);
+if (exportRoot) {
+	// 2a. Regular chats — conversations.json
+	const conversationsPath = join(exportRoot, 'conversations.json');
+	if (existsSync(conversationsPath)) {
+		const days = {};
+		let records = 0;
+		for (const conversation of JSON.parse(readFileSync(conversationsPath, 'utf8'))) {
+			for (const message of conversation.chat_messages ?? []) {
+				if (!message.created_at) continue;
+				const key = ymd(new Date(message.created_at));
+				days[key] ??= EMPTY();
+				days[key].chatMessages += 1;
+				days[key].chatTokens += estimateTokens(messageText(message));
+				records += 1;
+			}
+		}
+		if (records > 0) {
+			const count = writeSource('chat-export', mergeMax(loadDays(join(SOURCES_DIR, 'chat-export.json')), days));
+			console.log(`claude.ai chats: ${records} message(s) across ${count} day(s).`);
 		}
 	}
-	if (chatRecords > 0) {
-		const merged = mergeMax(loadDays(join(SOURCES_DIR, 'chat-export.json')), days);
-		const count = writeSource('chat-export', merged);
-		console.log(`claude.ai chat export: ${chatRecords} message(s) across ${count} day(s).`);
+
+	// 2b. Claude Design — design_chats/*.json
+	const designDir = join(exportRoot, 'design_chats');
+	if (existsSync(designDir)) {
+		const days = {};
+		let records = 0;
+		for (const file of readdirSync(designDir)) {
+			if (!file.endsWith('.json')) continue;
+			let doc;
+			try {
+				doc = JSON.parse(readFileSync(join(designDir, file), 'utf8'));
+			} catch {
+				continue;
+			}
+			for (const message of doc.messages ?? []) {
+				if (!message.created_at) continue;
+				const key = ymd(new Date(message.created_at));
+				days[key] ??= EMPTY();
+				days[key].designMessages += 1;
+				days[key].designTokens += estimateTokens(messageText(message));
+				records += 1;
+			}
+		}
+		if (records > 0) {
+			const count = writeSource('design-export', mergeMax(loadDays(join(SOURCES_DIR, 'design-export.json')), days));
+			console.log(`Claude Design: ${records} message(s) across ${count} day(s).`);
+		}
 	}
 }
 

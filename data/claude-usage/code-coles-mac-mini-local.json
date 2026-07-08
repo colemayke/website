@@ -1,29 +1,37 @@
 {
-	"generatedAt": "2026-07-08T17:52:32.293Z",
+	"generatedAt": "2026-07-08T18:08:07.078Z",
 	"days": {
 		"2026-07-04": {
 			"messages": 259,
 			"codeTokens": 11519967,
 			"chatMessages": 0,
-			"chatTokens": 0
+			"chatTokens": 0,
+			"designMessages": 0,
+			"designTokens": 0
 		},
 		"2026-07-06": {
 			"messages": 613,
 			"codeTokens": 34068864,
 			"chatMessages": 0,
-			"chatTokens": 0
+			"chatTokens": 0,
+			"designMessages": 0,
+			"designTokens": 0
 		},
 		"2026-07-07": {
 			"messages": 424,
 			"codeTokens": 36979113,
 			"chatMessages": 0,
-			"chatTokens": 0
+			"chatTokens": 0,
+			"designMessages": 0,
+			"designTokens": 0
 		},
 		"2026-07-08": {
-			"messages": 360,
-			"codeTokens": 24460995,
+			"messages": 470,
+			"codeTokens": 37096330,
 			"chatMessages": 0,
-			"chatTokens": 0
+			"chatTokens": 0,
+			"designMessages": 0,
+			"designTokens": 0
 		}
 	}
 }

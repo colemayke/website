@@ -5,36 +5,40 @@ import {useEffect, useMemo, useRef, useState} from 'react';
 // A GitHub-contribution-style heatmap, but for my Claude usage — styled to match
 // the rest of the site (heavy iOS cards) and coloured with Claude's own coral
 // scale instead of GitHub green. Cells sweep in left-to-right when the card
-// scrolls into view, and a segmented control flips between messages and tokens.
+// scrolls into view.
 //
-// Data is hybrid: real usage aggregated from Claude Code transcripts (and,
-// when available, a claude.ai chat export) lives in /claude-usage.json —
-// refresh it with `npm run usage`. Days without real data fall back to a
-// deterministic model seeded by the date, so the grid stays full and keeps
-// sliding forward between refreshes without a redeploy. Cell intensity uses
-// quantiles rather than fixed thresholds, so the two scales blend.
+// One combined view: cell intensity tracks message activity (chat + Claude Code
+// + Claude Design), while both the message and token totals show in the header
+// and per-day tooltips. Activity is the colour signal because agentic Claude
+// Code days carry orders of magnitude more (cache-inclusive) tokens than chat
+// days — colouring by tokens would wash the chat history out to nothing.
+//
+// Data is hybrid: real usage aggregated from Claude Code transcripts and an
+// Anthropic data export lives in /claude-usage.json — refresh it with
+// `npm run usage`. Days without real data fall back to a deterministic model
+// seeded by the date, so the grid stays full and slides forward between
+// refreshes without a redeploy. Intensity uses quantiles rather than fixed
+// thresholds, so the real and modeled scales blend.
 
-type Metric = 'messages' | 'tokens';
-
-// Shape of one day in /claude-usage.json.
+// Shape of one day in /claude-usage.json. `messages`/`codeTokens` are Claude
+// Code; chat and design are tracked separately.
 type RealDay = {
 	messages?: number;
 	codeTokens?: number;
 	chatMessages?: number;
 	chatTokens?: number;
+	designMessages?: number;
+	designTokens?: number;
 };
 
-// `tokens` is the combined total: chat, Claude Code, and Claude Design tokens.
-// `msgLevel`/`tokLevel` are the 0–4 intensity buckets, computed from quantiles
-// in buildCalendar so real and modeled days share one colour scale.
 type Day = {
 	date: Date;
 	messages: number;
 	tokens: number;
 	codeTokens: number;
+	chatTokens: number;
 	designTokens: number;
-	msgLevel: number;
-	tokLevel: number;
+	level: number;
 };
 
 const DAY_MS = 86_400_000;
@@ -179,56 +183,54 @@ function buildCalendar(realDays: Record<string, RealDay> | null) {
 		if (realDays && firstRealKey && key >= firstRealKey) {
 			if (!firstRealDate) firstRealDate = date;
 			const real = realDays[key];
-			const messages = (real?.messages ?? 0) + (real?.chatMessages ?? 0);
 			const codeTokens = real?.codeTokens ?? 0;
+			const chatTokens = real?.chatTokens ?? 0;
+			const designTokens = real?.designTokens ?? 0;
 			days.push({
 				date,
-				messages,
-				tokens: (real?.chatTokens ?? 0) + codeTokens,
+				messages: (real?.messages ?? 0) + (real?.chatMessages ?? 0) + (real?.designMessages ?? 0),
+				tokens: codeTokens + chatTokens + designTokens,
 				codeTokens,
-				designTokens: 0,
-				msgLevel: 0,
-				tokLevel: 0,
+				chatTokens,
+				designTokens,
+				level: 0,
 			});
 			continue;
 		}
 
 		const messages = messagesForDay(date, daysAgo);
+		const chatTokens = chatTokensForDay(date, messages);
 		const codeTokens = codeTokensForDay(date, daysAgo, messages);
 		const designTokens = designTokensForDay(date, daysAgo, messages);
 		days.push({
 			date,
 			messages,
-			tokens: chatTokensForDay(date, messages) + codeTokens + designTokens,
+			tokens: chatTokens + codeTokens + designTokens,
 			codeTokens,
+			chatTokens,
 			designTokens,
-			msgLevel: 0,
-			tokLevel: 0,
+			level: 0,
 		});
 	}
 
-	// Bucket intensity now that the full year is known.
-	const msgThresholds = quantileThresholds(days.map(day => day.messages));
-	const tokThresholds = quantileThresholds(days.map(day => day.tokens));
+	// Colour by message activity (see file header for why not tokens).
+	const thresholds = quantileThresholds(days.map(day => day.messages));
+
+	let totalMessages = 0;
+	let totalTokens = 0;
+	let best = days[0]!;
+	let modeledDays = 0;
 	for (const day of days) {
-		day.msgLevel = levelFor(day.messages, msgThresholds);
-		day.tokLevel = levelFor(day.tokens, tokThresholds);
+		day.level = levelFor(day.messages, thresholds);
+		totalMessages += day.messages;
+		totalTokens += day.tokens;
+		if (day.messages > best.messages) best = day;
+		if (firstRealDate && day.date < firstRealDate) modeledDays += 1;
 	}
 
 	const weeks: Day[][] = [];
 	for (let i = 0; i < days.length; i += 7) {
 		weeks.push(days.slice(i, i + 7));
-	}
-
-	let totalMessages = 0;
-	let totalTokens = 0;
-	let bestMessages = days[0]!;
-	let bestTokens = days[0]!;
-	for (const day of days) {
-		totalMessages += day.messages;
-		totalTokens += day.tokens;
-		if (day.messages > bestMessages.messages) bestMessages = day;
-		if (day.tokens > bestTokens.tokens) bestTokens = day;
 	}
 
 	// Current streak: consecutive days up to today with any activity.
@@ -238,7 +240,7 @@ function buildCalendar(realDays: Record<string, RealDay> | null) {
 		else break;
 	}
 
-	return {weeks, totalMessages, totalTokens, bestMessages, bestTokens, streak, firstRealDate};
+	return {weeks, totalMessages, totalTokens, best, streak, firstRealDate, modeledDays};
 }
 
 function formatDate(date: Date): string {
@@ -246,23 +248,21 @@ function formatDate(date: Date): string {
 }
 
 function formatTokens(n: number): string {
+	if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`;
 	if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
 	if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
 	return n.toString();
 }
 
 // Owns the wave-in animation. Mounts with every cell collapsed, then sweeps
-// them in left-to-right once `inView` flips. Remounted (via key) on metric
-// toggle so the sweep replays over the new colours.
+// them in left-to-right once `inView` flips.
 function HeatmapGrid({
 	weeks,
-	metric,
 	inView,
 	onHover,
 	onLeave,
 }: {
 	weeks: Day[][];
-	metric: Metric;
 	inView: boolean;
 	onHover: (event: React.MouseEvent, day: Day) => void;
 	onLeave: () => void;
@@ -305,7 +305,7 @@ function HeatmapGrid({
 							className={clsx(
 								'h-3 w-3 rounded-[3px] ring-1 ring-inset ring-black/[0.04] transition-all duration-300 ease-out hover:scale-125 dark:ring-white/[0.04]',
 								wave ? 'scale-100 opacity-100' : 'scale-0 opacity-0',
-								CELL_COLORS[metric === 'messages' ? day.msgLevel : day.tokLevel],
+								CELL_COLORS[day.level],
 							)}
 						/>
 					))}
@@ -333,39 +333,29 @@ export function ClaudeActivity() {
 		};
 	}, []);
 
-	const {weeks, totalMessages, totalTokens, bestMessages, bestTokens, streak, firstRealDate} =
-		useMemo(() => buildCalendar(realDays), [realDays]);
+	const {weeks, totalMessages, totalTokens, best, streak, modeledDays} = useMemo(
+		() => buildCalendar(realDays),
+		[realDays],
+	);
 
-	const [metric, setMetric] = useState<Metric>('messages');
 	const [tip, setTip] = useState<{x: number; y: number; label: string} | null>(null);
 
-	// The grid sweeps in once the card scrolls into view. Keying the grid by
-	// metric remounts it on toggle, so the sweep replays for the new metric.
 	const cardRef = useRef<HTMLDivElement>(null);
 	const inView = useInView(cardRef, {once: true, margin: '-64px'});
 
-	const switchMetric = (next: Metric) => {
-		if (next === metric) return;
-		setMetric(next);
-		setTip(null);
-	};
-
 	const show = (event: React.MouseEvent, day: Day) => {
-		let value: string;
-		if (metric === 'messages') {
-			value =
-				day.messages === 0
-					? 'No messages'
-					: `${day.messages} message${day.messages === 1 ? '' : 's'}`;
-		} else if (day.tokens === 0) {
-			value = 'No tokens';
+		let label: string;
+		if (day.messages === 0) {
+			label = `No activity · ${formatDate(day.date)}`;
 		} else {
-			const parts: string[] = [];
-			if (day.codeTokens > 0) parts.push(`${formatTokens(day.codeTokens)} Code`);
-			if (day.designTokens > 0) parts.push(`${formatTokens(day.designTokens)} Design`);
-			value = `${formatTokens(day.tokens)} tokens${parts.length ? ` (${parts.join(', ')})` : ''}`;
+			const sources: string[] = [];
+			if (day.codeTokens > 0) sources.push(`${formatTokens(day.codeTokens)} Code`);
+			if (day.designTokens > 0) sources.push(`${formatTokens(day.designTokens)} Design`);
+			if (day.chatTokens > 0) sources.push(`${formatTokens(day.chatTokens)} Chat`);
+			const tokens = `${formatTokens(day.tokens)} tokens${sources.length ? ` (${sources.join(', ')})` : ''}`;
+			label = `${day.messages} message${day.messages === 1 ? '' : 's'} · ${tokens} · ${formatDate(day.date)}`;
 		}
-		setTip({x: event.clientX, y: event.clientY, label: `${value} · ${formatDate(day.date)}`});
+		setTip({x: event.clientX, y: event.clientY, label});
 	};
 
 	// On narrow screens the grid overflows horizontally — start scrolled to the
@@ -374,7 +364,7 @@ export function ClaudeActivity() {
 	useEffect(() => {
 		const el = scrollRef.current;
 		if (el) el.scrollLeft = el.scrollWidth;
-	}, []);
+	}, [weeks]);
 
 	// Month labels: show a month above the first week where it changes.
 	const monthCols = useMemo(() => {
@@ -390,10 +380,6 @@ export function ClaudeActivity() {
 		return cols;
 	}, [weeks]);
 
-	const best = metric === 'messages' ? bestMessages : bestTokens;
-	const bestLabel =
-		metric === 'messages' ? `${best.messages} messages` : `${formatTokens(best.tokens)} tokens`;
-
 	return (
 		<div
 			ref={cardRef}
@@ -404,37 +390,18 @@ export function ClaudeActivity() {
 					<p className="text-xs text-neutral-500 dark:text-neutral-400">Claude</p>
 					<p className="mt-0.5 text-sm text-neutral-600 dark:text-neutral-300">
 						<span className="font-semibold text-neutral-900 dark:text-neutral-100">
-							{metric === 'messages'
-								? totalMessages.toLocaleString()
-								: `${formatTokens(totalTokens)}`}
+							{totalMessages.toLocaleString()}
 						</span>{' '}
-						{metric === 'messages'
-							? 'messages with Claude in the last year.'
-							: 'tokens across chat, Claude Code, and Claude Design in the last year.'}
+						messages and{' '}
+						<span className="font-semibold text-neutral-900 dark:text-neutral-100">
+							{formatTokens(totalTokens)}
+						</span>{' '}
+						tokens with Claude in the last year.
 					</p>
 				</div>
 				<span className="hidden shrink-0 rounded-full bg-[#D97757]/10 px-2.5 py-1 text-xs font-medium text-[#B14E2C] dark:bg-[#D97757]/15 dark:text-[#EC8A5D] sm:inline">
 					{streak}-day streak
 				</span>
-			</div>
-
-			{/* iOS-style segmented control */}
-			<div className="mt-3 inline-flex rounded-full bg-neutral-100 p-0.5 dark:bg-neutral-900">
-				{(['messages', 'tokens'] as const).map(option => (
-					<button
-						key={option}
-						type="button"
-						onClick={() => switchMetric(option)}
-						className={clsx(
-							'rounded-full px-3 py-1 text-xs font-medium capitalize transition-colors',
-							metric === option
-								? 'bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100'
-								: 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200',
-						)}
-					>
-						{option}
-					</button>
-				))}
 			</div>
 
 			<div
@@ -469,9 +436,7 @@ export function ClaudeActivity() {
 						</div>
 
 						<HeatmapGrid
-							key={metric}
 							weeks={weeks}
-							metric={metric}
 							inView={inView}
 							onHover={show}
 							onLeave={() => setTip(null)}
@@ -490,10 +455,8 @@ export function ClaudeActivity() {
 			</div>
 
 			<p className="mt-3 text-[11px] leading-5 text-neutral-400 dark:text-neutral-500">
-				Busiest day was {formatDate(best.date)} with {bestLabel}.
-				{firstRealDate ? (
-					<> Real usage from {formatDate(firstRealDate)} onward; earlier days are modeled.</>
-				) : null}
+				Busiest day was {formatDate(best.date)} with {best.messages} messages.
+				{modeledDays > 7 ? <> Earlier days are modeled.</> : null}
 			</p>
 
 			{tip ? (

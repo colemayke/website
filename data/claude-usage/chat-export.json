@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-07-08T18:08:07.165Z",
+	"generatedAt": "2026-07-08T18:08:07.140Z",
 	"days": {
 		"2025-01-11": {
 			"messages": 0,
@@ -694,7 +694,7 @@
 			"codeTokens": 0,
 			"chatMessages": 57,
 			"chatTokens": 24352,
-			"designMessages": 151,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-22": {
@@ -702,7 +702,7 @@
 			"codeTokens": 0,
 			"chatMessages": 32,
 			"chatTokens": 10514,
-			"designMessages": 23,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-23": {
@@ -710,7 +710,7 @@
 			"codeTokens": 0,
 			"chatMessages": 46,
 			"chatTokens": 16864,
-			"designMessages": 64,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-24": {
@@ -718,7 +718,7 @@
 			"codeTokens": 0,
 			"chatMessages": 24,
 			"chatTokens": 6418,
-			"designMessages": 1,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-26": {
@@ -734,15 +734,7 @@
 			"codeTokens": 0,
 			"chatMessages": 2,
 			"chatTokens": 0,
-			"designMessages": 20,
-			"designTokens": 0
-		},
-		"2026-04-28": {
-			"messages": 0,
-			"codeTokens": 0,
-			"chatMessages": 0,
-			"chatTokens": 0,
-			"designMessages": 2,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-29": {
@@ -750,7 +742,7 @@
 			"codeTokens": 0,
 			"chatMessages": 20,
 			"chatTokens": 3212,
-			"designMessages": 28,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-04-30": {
@@ -766,7 +758,7 @@
 			"codeTokens": 0,
 			"chatMessages": 10,
 			"chatTokens": 3610,
-			"designMessages": 38,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-05-04": {
@@ -774,7 +766,7 @@
 			"codeTokens": 0,
 			"chatMessages": 24,
 			"chatTokens": 8495,
-			"designMessages": 125,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-05-05": {
@@ -782,7 +774,7 @@
 			"codeTokens": 0,
 			"chatMessages": 20,
 			"chatTokens": 5225,
-			"designMessages": 19,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-05-06": {
@@ -838,7 +830,7 @@
 			"codeTokens": 0,
 			"chatMessages": 30,
 			"chatTokens": 42,
-			"designMessages": 36,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-05-16": {
@@ -970,23 +962,23 @@
 			"designTokens": 0
 		},
 		"2026-06-06": {
-			"messages": 354,
-			"codeTokens": 24577270,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 30,
 			"chatTokens": 7630,
 			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-06-07": {
-			"messages": 497,
-			"codeTokens": 17220694,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 6,
 			"chatTokens": 1464,
 			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-06-08": {
-			"messages": 3,
+			"messages": 0,
 			"codeTokens": 0,
 			"chatMessages": 30,
 			"chatTokens": 4621,
@@ -994,24 +986,24 @@
 			"designTokens": 0
 		},
 		"2026-06-09": {
-			"messages": 46,
-			"codeTokens": 3626763,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 46,
 			"chatTokens": 76283,
-			"designMessages": 10,
+			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-06-10": {
-			"messages": 537,
-			"codeTokens": 28509061,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 74,
 			"chatTokens": 28637,
 			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-06-11": {
-			"messages": 9,
-			"codeTokens": 806102,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 10,
 			"chatTokens": 2128,
 			"designMessages": 0,
@@ -1066,8 +1058,8 @@
 			"designTokens": 0
 		},
 		"2026-06-18": {
-			"messages": 297,
-			"codeTokens": 10141846,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 74,
 			"chatTokens": 39222,
 			"designMessages": 0,
@@ -1106,24 +1098,16 @@
 			"designTokens": 0
 		},
 		"2026-06-25": {
-			"messages": 2555,
-			"codeTokens": 481150954,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 48,
 			"chatTokens": 34327,
 			"designMessages": 0,
 			"designTokens": 0
 		},
-		"2026-06-26": {
-			"messages": 714,
-			"codeTokens": 183578464,
-			"chatMessages": 0,
-			"chatTokens": 0,
-			"designMessages": 0,
-			"designTokens": 0
-		},
 		"2026-06-27": {
-			"messages": 2405,
-			"codeTokens": 603998668,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 64,
 			"chatTokens": 61426,
 			"designMessages": 0,
@@ -1178,8 +1162,8 @@
 			"designTokens": 0
 		},
 		"2026-07-04": {
-			"messages": 259,
-			"codeTokens": 11519967,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 38,
 			"chatTokens": 21676,
 			"designMessages": 0,
@@ -1194,26 +1178,18 @@
 			"designTokens": 0
 		},
 		"2026-07-06": {
-			"messages": 613,
-			"codeTokens": 34068864,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 146,
 			"chatTokens": 81530,
 			"designMessages": 0,
 			"designTokens": 0
 		},
 		"2026-07-07": {
-			"messages": 424,
-			"codeTokens": 36979113,
+			"messages": 0,
+			"codeTokens": 0,
 			"chatMessages": 72,
 			"chatTokens": 50606,
-			"designMessages": 0,
-			"designTokens": 0
-		},
-		"2026-07-08": {
-			"messages": 470,
-			"codeTokens": 37096330,
-			"chatMessages": 0,
-			"chatTokens": 0,
 			"designMessages": 0,
 			"designTokens": 0
 		}
