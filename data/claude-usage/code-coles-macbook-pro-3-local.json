@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-07-08T17:59:31.514Z",
+	"generatedAt": "2026-07-08T17:59:31.511Z",
 	"days": {
 		"2026-06-06": {
 			"messages": 354,
@@ -58,30 +58,6 @@
 		"2026-06-27": {
 			"messages": 2405,
 			"codeTokens": 603998668,
-			"chatMessages": 0,
-			"chatTokens": 0
-		},
-		"2026-07-04": {
-			"messages": 259,
-			"codeTokens": 11519967,
-			"chatMessages": 0,
-			"chatTokens": 0
-		},
-		"2026-07-06": {
-			"messages": 613,
-			"codeTokens": 34068864,
-			"chatMessages": 0,
-			"chatTokens": 0
-		},
-		"2026-07-07": {
-			"messages": 424,
-			"codeTokens": 36979113,
-			"chatMessages": 0,
-			"chatTokens": 0
-		},
-		"2026-07-08": {
-			"messages": 360,
-			"codeTokens": 24460995,
 			"chatMessages": 0,
 			"chatTokens": 0
 		}
