@@ -53,7 +53,7 @@ const BLOCK_MS = 460;
 function PromptBubble({text}: {text: string}) {
 	return (
 		<motion.div {...enter} className="flex justify-end">
-			<div className="w-fit max-w-[82%] rounded-2xl rounded-br-md bg-[#0a7cff] px-3.5 py-2 text-sm text-white shadow-sm">
+			<div className="w-fit max-w-[82%] rounded-2xl rounded-br-md bg-imsg px-3.5 py-2 text-sm text-white shadow-sm">
 				{text}
 			</div>
 		</motion.div>
@@ -279,7 +279,7 @@ export function Conversation({turns}: {turns: ConversationTurn[]}) {
 						className={clsx(
 							'flex size-7 shrink-0 items-center justify-center rounded-full transition-colors',
 							phase === 'typing' && typed
-								? 'bg-[#0a7cff] text-white'
+								? 'bg-imsg text-white'
 								: 'bg-neutral-200 text-neutral-400 dark:bg-neutral-800 dark:text-neutral-500',
 						)}
 					>

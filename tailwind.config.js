@@ -15,6 +15,7 @@ module.exports = {
 		extend: {
 			colors: {
 				blurple: '#5865F2',
+				imsg: '#0a7cff',
 			},
 		},
 	},

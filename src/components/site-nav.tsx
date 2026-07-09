@@ -8,6 +8,7 @@ const navItems = [
 	{href: '/projects/design', label: 'Design'},
 	{href: '/projects/software', label: 'Software'},
 	{href: '/projects/hardware', label: 'Hardware'},
+	{href: '/games', label: 'Games'},
 ];
 
 export function SiteNav({currentPath}: {currentPath: string}) {
