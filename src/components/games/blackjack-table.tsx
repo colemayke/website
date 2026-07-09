@@ -4,6 +4,7 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import {
 	BlackjackEngine,
 	STARTING_BANKROLL,
+	cardValue,
 	handValue,
 	type Card,
 	type GameEvent,
@@ -45,7 +46,7 @@ interface RoundView {
 }
 
 type ThreadItem =
-	| {key: string; kind: 'dealer'; text: string}
+	| {key: string; kind: 'dealer'; text: string; big: boolean}
 	| {key: string; kind: 'player'; text: string}
 	| {key: string; kind: 'dealer-hand'; round: number}
 	| {key: string; kind: 'player-hand'; round: number};
@@ -99,7 +100,16 @@ function TypingDots() {
 	);
 }
 
-function DealerBubble({text, isLast}: {text: string; isLast: boolean}) {
+function DealerBubble({text, isLast, big}: {text: string; isLast: boolean; big: boolean}) {
+	// Emoji-only messages render large and bare, the way iMessage does it.
+	if (big) {
+		return (
+			<motion.div {...enter} className="w-fit px-0.5 py-0.5 text-3xl leading-none">
+				{text}
+			</motion.div>
+		);
+	}
+
 	return (
 		<motion.div
 			{...enter}
@@ -349,9 +359,9 @@ export function BlackjackTable() {
 		});
 	};
 
-	const dealerSays = (text: string, delay = 650): Step => ({
+	const dealerSays = (text: string, delay = 650, big = false): Step => ({
 		delay,
-		run: () => pushItem({key: nextKey(), kind: 'dealer', text}),
+		run: () => pushItem({key: nextKey(), kind: 'dealer', text, big}),
 	});
 
 	const playerSays = (text: string): Step => ({
@@ -385,6 +395,8 @@ export function BlackjackTable() {
 	const stepsFor = (events: GameEvent[], round: number): Step[] => {
 		const steps: Step[] = [];
 		const handCount = () => engine.hands.length;
+		// Hand index that just doubled, so the very next card can earn a 😳.
+		let pendingDouble: number | null = null;
 
 		for (const event of events) {
 			switch (event.type) {
@@ -457,6 +469,13 @@ export function BlackjackTable() {
 								return {...view, hands};
 							}),
 					});
+					// Doubling on 11 and catching a ten for 21 deserves a reaction.
+					if (pendingDouble === event.hand) {
+						if (event.total === 21 && cardValue(event.card.rank) === 10) {
+							steps.push(dealerSays('😳😳😳', 550, true));
+						}
+						pendingDouble = null;
+					}
 					break;
 
 				case 'playerBust':
@@ -481,6 +500,7 @@ export function BlackjackTable() {
 							}),
 					});
 					steps.push(dealerSays(`Bet’s ${fmt(event.bet)} now. One card.`, 450));
+					pendingDouble = event.hand;
 					break;
 
 				case 'split': {
@@ -511,6 +531,10 @@ export function BlackjackTable() {
 					steps.push(
 						dealerSays(`Dealer turns over the ${cardShorthand(event.card)} — ${event.total}.`),
 					);
+					// Two cards at reveal totalling 21 is always a dealer natural.
+					if (event.total === 21 && engine.dealer.length === 2) {
+						steps.push(dealerSays('😂😂😂', 550, true));
+					}
 					break;
 
 				case 'dealerHit':
@@ -685,16 +709,17 @@ export function BlackjackTable() {
 
 	// Group consecutive dealer texts so the avatar shows once per burst.
 	const grouped: Array<
-		| {key: string; kind: 'dealer-group'; texts: Array<{key: string; text: string}>}
+		| {key: string; kind: 'dealer-group'; texts: Array<{key: string; text: string; big: boolean}>}
 		| Exclude<ThreadItem, {kind: 'dealer'}>
 	> = [];
 	for (const item of table.thread) {
 		if (item.kind === 'dealer') {
 			const last = grouped[grouped.length - 1];
+			const entry = {key: item.key, text: item.text, big: item.big};
 			if (last && last.kind === 'dealer-group') {
-				last.texts.push({key: item.key, text: item.text});
+				last.texts.push(entry);
 			} else {
-				grouped.push({key: item.key, kind: 'dealer-group', texts: [{key: item.key, text: item.text}]});
+				grouped.push({key: item.key, kind: 'dealer-group', texts: [entry]});
 			}
 		} else {
 			grouped.push(item);
@@ -745,6 +770,7 @@ export function BlackjackTable() {
 										<DealerBubble
 											key={entry.key}
 											text={entry.text}
+											big={entry.big}
 											isLast={index === item.texts.length - 1}
 										/>
 									))}
