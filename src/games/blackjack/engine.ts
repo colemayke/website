@@ -1,8 +1,10 @@
 /**
  * Pure blackjack engine — no React or DOM concerns.
  *
- * House rules: 6-deck shoe, cut card at ~75% penetration (reshuffle between
- * rounds once fewer than 78 cards remain), dealer stands on all 17s (S17),
+ * House rules: 6-deck shoe, cut card at 80% penetration (reshuffle between
+ * rounds once fewer than a fifth of the shoe remains; if a pathological round
+ * somehow drains the shoe entirely, a fresh shoe is shuffled in mid-round),
+ * dealer stands on all 17s (S17),
  * dealer peeks on an Ace or 10-value up-card, naturals pay 3:2, double on any
  * first two cards, up to 3 splits (4 hands), split Aces get one card each,
  * insurance costs half the bet and pays 2:1.
@@ -33,7 +35,8 @@ export interface Card {
 export type Rng = () => number;
 
 export const DECK_COUNT = 6;
-export const CUT_CARD_REMAINING = 78;
+/** Reshuffle between rounds once fewer than 1/5 of the shoe remains. */
+export const CUT_CARD_REMAINING = Math.floor((DECK_COUNT * 52) / 5);
 export const STARTING_BANKROLL = 1000;
 
 const RANKS: readonly Rank[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -216,13 +219,13 @@ export class BlackjackEngine {
 		};
 		this.hands.push(hand);
 
-		hand.cards.push(this.draw());
+		hand.cards.push(this.draw(events));
 		events.push({type: 'dealPlayer', hand: 0, card: hand.cards[0]!});
-		this.dealer.push(this.draw());
+		this.dealer.push(this.draw(events));
 		events.push({type: 'dealDealerUp', card: this.dealer[0]!});
-		hand.cards.push(this.draw());
+		hand.cards.push(this.draw(events));
 		events.push({type: 'dealPlayer', hand: 0, card: hand.cards[1]!});
-		this.dealer.push(this.draw());
+		this.dealer.push(this.draw(events));
 		events.push({type: 'dealDealerHole'});
 
 		const upCard = this.dealer[0]!;
@@ -348,11 +351,17 @@ export class BlackjackEngine {
 		return !hand.fromSplit && hand.cards.length === 2 && handValue(hand.cards).total === 21;
 	}
 
-	private draw(): Card {
-		const card = this.shoe[this.drawIndex];
-		if (!card) {
-			throw new Error('Shoe is empty');
+	private draw(events: GameEvent[]): Card {
+		// The cut card makes this unreachable in normal play, but a round of
+		// maximum splits and tiny cards could in theory drain the shoe. Casinos
+		// shuffle in a fresh shoe and keep dealing; so do we.
+		if (this.drawIndex >= this.shoe.length) {
+			this.shoe = createShoe(this.decks, this.rng);
+			this.drawIndex = 0;
+			events.push({type: 'shuffle', cardsInShoe: this.shoe.length});
 		}
+
+		const card = this.shoe[this.drawIndex]!;
 		this.drawIndex += 1;
 		return card;
 	}
@@ -373,7 +382,7 @@ export class BlackjackEngine {
 	}
 
 	private dealTo(hand: PlayerHand, index: number, events: GameEvent[]): void {
-		const card = this.draw();
+		const card = this.draw(events);
 		hand.cards.push(card);
 		events.push({type: 'playerCard', hand: index, card, total: handValue(hand.cards).total});
 	}
@@ -482,7 +491,7 @@ export class BlackjackEngine {
 			// S17: the dealer stands on every 17, soft included.
 			let value = handValue(this.dealer);
 			while (value.total < 17) {
-				const card = this.draw();
+				const card = this.draw(events);
 				this.dealer.push(card);
 				value = handValue(this.dealer);
 				events.push({type: 'dealerHit', card, total: value.total});

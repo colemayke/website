@@ -73,16 +73,20 @@ describe('shoe', () => {
 		assert.deepEqual([...shuffled].sort((a, b) => a - b), items);
 	});
 
+	test('cut card sits at 1/5 of the shoe', () => {
+		assert.equal(CUT_CARD_REMAINING, Math.floor((6 * 52) / 5));
+	});
+
 	test('reshuffles at the cut card, not every hand', () => {
-		// An 80-card rigged shoe with the real cut card: round one plays without
-		// a shuffle, and the shoe reshuffles before round two once fewer than 78
-		// cards remain.
+		// A 64-card rigged shoe with the real cut card (62): round one plays
+		// without a shuffle, and the shoe reshuffles before round two once fewer
+		// than a fifth of the shoe remains.
 		const shoe: Card[] = [];
-		for (let i = 0; i < 40; i++) {
+		for (let i = 0; i < 32; i++) {
 			shoe.push(card('10', 'spades'), card('7', 'hearts'));
 		}
 		const engine = new BlackjackEngine({shoe, rng: lcg(3)});
-		assert.equal(engine.cardsRemaining, 80);
+		assert.equal(engine.cardsRemaining, 64);
 
 		const first = engine.startRound(10);
 		assert.equal(eventsOf(first, 'shuffle').length, 0);
@@ -92,6 +96,23 @@ describe('shoe', () => {
 		const second = engine.startRound(10);
 		assert.equal(eventsOf(second, 'shuffle').length, 1);
 		assert.ok(engine.cardsRemaining > 300);
+	});
+
+	test('shuffles in a fresh shoe if it runs dry mid-round', () => {
+		// Four cards exactly cover the opening deal; the first hit must come
+		// from a freshly shuffled shoe instead of throwing.
+		const engine = new BlackjackEngine({
+			shoe: [card('10'), card('10', 'diamonds'), card('6', 'hearts'), card('6', 'clubs')],
+			cutCardRemaining: 0,
+			rng: lcg(42),
+		});
+		engine.startRound(10);
+		assert.equal(engine.cardsRemaining, 0);
+
+		const events = engine.act('hit');
+		assert.equal(eventsOf(events, 'shuffle').length, 1);
+		assert.equal(engine.hands[0]?.cards.length, 3);
+		assert.ok(engine.cardsRemaining > 250);
 	});
 });
 

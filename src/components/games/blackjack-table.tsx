@@ -401,7 +401,7 @@ export function BlackjackTable() {
 		for (const event of events) {
 			switch (event.type) {
 				case 'shuffle':
-					steps.push(dealerSays('Cut card’s out — shuffling the shoe.', 500));
+					steps.push(dealerSays('Shuffling a fresh shoe.', 500));
 					break;
 
 				case 'dealPlayer':
